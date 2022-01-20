@@ -1,0 +1,17 @@
+.popup-edit{
+  all: unset;
+  position: fixed;
+  width: 430px;
+  margin: 0;
+  padding: 0;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  border: none;
+  display: none;
+}
+@media (max-width: 550px){
+  .popup-edit{
+    width: 282px;
+  }
+}

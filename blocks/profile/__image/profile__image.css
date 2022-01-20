@@ -1,0 +1,11 @@
+.profile__image{
+  grid-area: image;
+  width: 127.5px;
+  height: 127.5px;
+  border-radius: 50%;
+}
+@media (max-width: 768px){
+  .profile__image{
+    justify-self: center;
+  }
+}

@@ -1,0 +1,9 @@
+.popup-edit__form{
+  width: 100%;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  color: black;
+  box-shadow: 0 0 0 100vw rgba(0,0,0,.5);
+}

@@ -1,0 +1,29 @@
+@import url(../vendor/normalize.css);
+@import url('../fonts/Inter-3.19/Inter Web/inter.css');
+@import url(../blocks/page/page.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+@import url(../blocks/content/content.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__image/profile__image.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__about-me/profile__about-me.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/grid-elements/grid-elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__name/element__name.css);
+@import url(../blocks/element/__like-button/element__like-button.css);
+@import url(../blocks/popup-edit/popup-edit.css);
+@import url(../blocks/popup-edit/_opened/popup-edit_opened.css);
+@import url(../blocks/popup-edit/__form/popup-edit__form.css);
+@import url(../blocks/popup-edit/__close-icon/popup-edit__close-icon.css);
+@import url(../blocks/popup-edit/__title/popup-edit__title.css);
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__save-button/form__save-button.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+
+

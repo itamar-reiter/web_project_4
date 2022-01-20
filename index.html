@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+    <title>Around the U.S</title>
+    <link rel="stylesheet" href="pages/index.css" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <div class="header__logo"></div>
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img class="profile__image" src="images/profile_image.jpg" alt="jacques'es image" />
+        <h1 class="profile__name">Jacques Cousteau</h1>
+        <button type="button" id="editButton" class="profile__edit-button"></button>
+        <p class="profile__about-me">Explorer</p>
+        <button type="button" id="addButton" class="profile__add-button"></button>
+      </section>
+      <section class="grid-elements">
+        <div class="element">
+          <img class="element__image" src="images/photo-grid-image-1.jpg" alt="Yosemite Valley" />
+          <h2 class="element__name">Yosemite Valley</h2>
+          <button type="button" id="like-button-1" class="element__like-button"></button>
+        </div>
+        <div class="element">
+          <img class="element__image" src="images/photo-grid-image-2.png" alt="Lake Louise" />
+          <h2 class="element__name">Lake Louise</h2>
+          <button type="button" id="like-button-2" class="element__like-button"></button>
+        </div>
+        <div class="element">
+          <img class="element__image" src="images/photo-grid-image-3.png" alt="Bald Mountains" />
+          <h2 class="element__name">Bald Mountains</h2>
+          <button type="button" id="like-button-3" class="element__like-button"></button>
+        </div>
+        <div class="element">
+          <img class="element__image" src="images/photo-grid-image-4.png" alt="Latemar" />
+          <h2 class="element__name">Latemar</h2>
+          <button type="button" id="like-button-4" class="element__like-button"></button>
+        </div>
+        <div class="element">
+          <img class="element__image" src="images/photo-grid-image-5.png" alt="Vanoise Nationa..." />
+          <h2 class="element__name">Vanoise Nationa...</h2>
+          <button type="button" id="like-button-5" class="element__like-button"></button>
+        </div>
+        <div class="element">
+          <img class="element__image" src="images/photo-grid-image-6.png" alt="Lago di Braies" />
+          <h2 class="element__name">Lago di Braies</h2>
+          <button type="button" id="like-button-6" class="element__like-button"></button>
+        </div>
+      </section>
+      <section class="popup-edit">
+        <div class="popup-edit__form">
+          <button type="button" id="close-icon" class="popup-edit__close-icon"></button>
+          <h2 class="popup-edit__title">Edit profile</h2>
+          <form class="form">
+            <input class="form__input" type="text" name="name" id="name" placeholder="name" />
+            <input class="form__input" type="text" name="about-me" id="about-me" placeholder="about me" />
+            <button type="submit" id="submitButton" class="form__save-button">Save</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">© 2021 Around The U.S.</p>
+    </footer>
+    <script src="script/script.js"></script>
+  </body>
+</html>
