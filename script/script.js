@@ -1,15 +1,24 @@
-let profileName = document.querySelector(".profile__name");
-let profileAboutMe = document.querySelector(".profile__about-me");
-let editButton= document.querySelector("#editButton");
-let addButton= document.querySelector("#addButton");
-let popupEdit = document.querySelector(".popup-edit");
-let popupEditForm = popupEdit.querySelector(".popup-edit__form");
+const profile = document.querySelector(".profile");
+const profileName = profile.querySelector(".profile__name");
+const profileAboutMe = profile.querySelector(".profile__about-me");
+const editButton= profile.querySelector("#editButton");
+const addButton= profile.querySelector("#addButton");
+const placesContainer = document.querySelector(".grid-elements");
+const popupEdit = document.querySelector(".popup-edit");
+const popupEditForm = popupEdit.querySelector(".popup-edit__form");
 const popupTitle = popupEditForm.querySelector(".popup-edit__title");
-let formCloseButton = popupEditForm.querySelector("#close-icon");
-let form = popupEditForm.querySelector(".form");
-let formSubmitButton = form.querySelector(".form__save-button");
-let nameInput = form.querySelector("#name");
-let aboutMeInput = form.querySelector("#about-me");
+const formCloseButton = popupEditForm.querySelector("#close-icon");
+const form = popupEditForm.querySelector(".form");
+const formSubmitButton = form.querySelector(".form__save-button");
+const nameInput = form.querySelector("#name");
+const aboutMeInput = form.querySelector("#about-me");
+function singleNewPlace(){
+  const newPlaceTemplate = document.querySelector("#newPlaceTemplate").content;
+  const newPlace = newPlaceTemplate.querySelector(".element").cloneNode(true);
+  newPlace.querySelector(".element__name").textContent = nameInput.value;
+  newPlace.querySelector(".element__image").src = aboutMeInput.value;
+  return newPlace;
+}
 function enableDisableFormEdit(){
   if (popupEdit.classList.contains("popup-edit_opened") !== true){
     nameInput.value = profileName.textContent;
@@ -22,26 +31,28 @@ function enableDisableFormEdit(){
   popupEdit.classList.toggle("popup-edit_opened");
 }
 function enableDisableFormAdd(){
+  if (popupEdit.classList.contains("popup-edit_opened") !== true){
     nameInput.value = "";
     aboutMeInput.value = "";
     popupTitle.textContent = "New place";
     nameInput.placeholder = "title";
     aboutMeInput.placeholder = "Image link";
     formSubmitButton.textContent = "Create";
+  }
   popupEdit.classList.toggle("popup-edit_opened");
 }
 function handleProfileFormSubmit(evt){
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileAboutMe.textContent = aboutMeInput.value;
+  if (formSubmitButton.textContent === "Save"){
+    profileName.textContent = nameInput.value;
+    profileAboutMe.textContent = aboutMeInput.value;
+  }
+  else{
+    placesContainer.prepend(singleNewPlace());
+  }
   enableDisableFormEdit();
 }
 editButton.addEventListener("click", enableDisableFormEdit);
 addButton.addEventListener("click", enableDisableFormAdd);
 formCloseButton.addEventListener("click", enableDisableFormEdit);
 form.addEventListener("submit" , handleProfileFormSubmit);
-/*
-if (nameInput.textContent ==! "" && aboutMeInput.textContent ==! ""){
-  formSubmitButton.classList.add("popup-edit__save-button_active");
-}
-*/

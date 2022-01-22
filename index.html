@@ -55,9 +55,9 @@
           <button type="button" id="close-icon" class="popup-edit__close-icon"></button>
           <h2 class="popup-edit__title"></h2>
           <form class="form">
-            <input class="form__input" type="text" name="name" id="name" placeholder="name" />
-            <input class="form__input" type="text" name="about-me" id="about-me" placeholder="about me" />
-            <button type="submit" id="submitButton" class="form__save-button">Save</button>
+            <input class="form__input" type="text" name="name" id="name" placeholder="" />
+            <input class="form__input" type="text" name="about-me" id="about-me" placeholder="" />
+            <button type="submit" id="submitButton" class="form__save-button"></button>
           </form>
         </div>
       </section>
@@ -65,6 +65,13 @@
     <footer class="footer">
       <p class="footer__copyright">© 2021 Around The U.S.</p>
     </footer>
+    <template id="newPlaceTemplate">
+      <div class="element">
+        <img class="element__image" src="" />
+        <h2 class="element__name"></h2>
+        <button type="button" class="element__like-button"></button>
+      </div>
+    </template>
     <script src="script/script.js"></script>
   </body>
 </html>

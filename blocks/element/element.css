@@ -8,8 +8,8 @@
   color: #000000;
   overflow: hidden;
   box-sizing: border-box;
-  grid-template-rows: repeat(2, min-content);
-  grid-template-columns: repeat(2, max-content);
+  /* grid-template-rows: repeat(2, min-content);
+  grid-template-columns: repeat(2, max-content); */
   gap: 0 0;
   grid-template-areas:
   "image image"
