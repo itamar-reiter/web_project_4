@@ -12,9 +12,11 @@
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/grid-elements/grid-elements.css);
 @import url(../blocks/element/element.css);
+@import url(../blocks/element/__garbage/element__garbage.css);
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__name/element__name.css);
 @import url(../blocks/element/__like-button/element__like-button.css);
+@import url(../blocks/element/__like-button/_active/element__like-button_active.css);
 @import url(../blocks/popup-edit/popup-edit.css);
 @import url(../blocks/popup-edit/_opened/popup-edit_opened.css);
 @import url(../blocks/popup-edit/__form/popup-edit__form.css);

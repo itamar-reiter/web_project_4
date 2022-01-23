@@ -1,0 +1,9 @@
+.element__garbage{
+  grid-area: "garbage";
+  width: 18px;
+  height: 19.3px;
+  margin: 0; 
+  padding: 0;
+  border: 1px solid red;
+  transform: translate() ; 
+}
