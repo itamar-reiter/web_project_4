@@ -4,6 +4,32 @@ const profileAboutMe = profile.querySelector(".profile__about-me");
 const editButton= profile.querySelector("#editButton");
 const addButton= profile.querySelector("#addButton");
 const placesContainer = document.querySelector(".grid-elements");
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg"
+  }
+];
 const popupEdit = document.querySelector(".popup-edit");
 const popupEditForm = popupEdit.querySelector(".popup-edit__form");
 const popupTitle = popupEditForm.querySelector(".popup-edit__title");
@@ -12,6 +38,13 @@ const form = popupEditForm.querySelector(".form");
 const formSubmitButton = form.querySelector(".form__save-button");
 const nameInput = form.querySelector("#name");
 const aboutMeInput = form.querySelector("#about-me");
+initialCards.forEach(card => {
+  const newPlaceTemplate = document.querySelector("#newPlaceTemplate").content;
+  const newPlace = newPlaceTemplate.querySelector(".element").cloneNode(true);
+  newPlace.querySelector(".element__name").textContent = card.name;
+  newPlace.querySelector(".element__image").src = card.link;
+  placesContainer.append(newPlace);
+})
 function singleNewPlace(){
   const newPlaceTemplate = document.querySelector("#newPlaceTemplate").content;
   const newPlace = newPlaceTemplate.querySelector(".element").cloneNode(true);
