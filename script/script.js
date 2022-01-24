@@ -30,7 +30,6 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg"
   }
 ];
-const cardImage = document.querySelector(".element__image");
 const popupEdit = document.querySelector(".popup-edit");
 const popupEditForm = popupEdit.querySelector(".popup-edit__form");
 const popupTitle = popupEditForm.querySelector(".popup-edit__title");
@@ -42,6 +41,7 @@ const aboutMeInput = form.querySelector("#about-me");
 initialCards.forEach(card => {
   const newPlaceTemplate = document.querySelector("#newPlaceTemplate").content;
   const newPlace = newPlaceTemplate.querySelector(".element").cloneNode(true);
+  const cardGarbageButton = newPlace.querySelector(".element__garbage-button");
   const cardLikeButton = newPlace.querySelector(".element__like-button");
   newPlace.querySelector(".element__name").textContent = card.name;
   newPlace.querySelector(".element__image").src = card.link;
@@ -54,6 +54,7 @@ initialCards.forEach(card => {
 function singleNewPlace(){
   const newPlaceTemplate = document.querySelector("#newPlaceTemplate").content;
   const newPlace = newPlaceTemplate.querySelector(".element").cloneNode(true);
+  const cardGarbageButton = newPlace.querySelector(".element__garbage-button");
   const cardLikeButton = newPlace.querySelector(".element__like-button");
   newPlace.querySelector(".element__name").textContent = nameInput.value;
   newPlace.querySelector(".element__image").src = aboutMeInput.value;
