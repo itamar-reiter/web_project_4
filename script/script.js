@@ -41,39 +41,15 @@ const form = popupEditForm.querySelector(".form");
 const formSubmitButton = form.querySelector(".form__save-button");
 const nameInput = form.querySelector("#name");
 const aboutMeInput = form.querySelector("#about-me");
-initialCards.forEach(card => {
+function singleNewPlace(placeName, placePhoto){
   const newPlaceTemplate = document.querySelector("#newPlaceTemplate").content;
   const newPlace = newPlaceTemplate.querySelector(".element").cloneNode(true);
   const cardGarbageButton = newPlace.querySelector(".element__garbage-button");
   const cardImage = newPlace.querySelector(".element__image");
   const cardName = newPlace.querySelector(".element__name");
   const cardLikeButton = newPlace.querySelector(".element__like-button");
-  cardImage.src = card.link;
-  cardName.textContent = card.name;
-  placesContainer.append(newPlace);
-  cardGarbageButton.addEventListener("click", () => {
-    newPlace.remove();
-  });
-  cardImage.addEventListener("click", () => {
-    popupImageBackground.style.backgroundImage = "url("+ cardImage.src +")";
-    popupImage.classList.add("popup-image_active");
-  });
-  popupImageCloseButton.addEventListener("click", () => {
-    popupImage.classList.remove("popup-image_active");
-  });
-  cardLikeButton.addEventListener("click", () => {
-    cardLikeButton.classList.toggle("element__like-button_active");
-  });
-  /* singleNewPlace(); */ 
-})
-function singleNewPlace(){
-  const newPlaceTemplate = document.querySelector("#newPlaceTemplate").content;
-  const newPlace = newPlaceTemplate.querySelector(".element").cloneNode(true);
-  const cardGarbageButton = newPlace.querySelector(".element__garbage-button");
-  const cardImage = newPlace.querySelector(".element__image");
-  const cardLikeButton = newPlace.querySelector(".element__like-button");
-  newPlace.querySelector(".element__name").textContent = nameInput.value;
-  newPlace.querySelector(".element__image").src = aboutMeInput.value;
+  cardName.textContent = placeName;
+  cardImage.src = placePhoto;
   cardGarbageButton.addEventListener("click", () => {
     newPlace.remove();
   });
@@ -89,6 +65,9 @@ function singleNewPlace(){
   });
   return newPlace;
 }
+initialCards.forEach(card => { 
+placesContainer.append(singleNewPlace(card.name, card.link));
+})
 function enableDisableFormEdit(){
   if (popupEdit.classList.contains("popup-edit_opened") !== true){
     nameInput.value = profileName.textContent;
@@ -118,7 +97,7 @@ function handleProfileFormSubmit(evt){
     profileAboutMe.textContent = aboutMeInput.value;
   }
   else{
-    placesContainer.prepend(singleNewPlace());
+    placesContainer.prepend(singleNewPlace(nameInput.value, aboutMeInput.value));
   }
   enableDisableFormEdit();
 }
