@@ -1,4 +1,6 @@
-const allButtons = document.querySelectorAll("button");
+const popupImage = document.querySelector(".popup-image");
+const popupImageBackground = popupImage.querySelector(".popup-image__background");
+const popupImageCloseButton = popupImageBackground.querySelector(".popup-image__close-icon");
 const profile = document.querySelector(".profile");
 const profileName = profile.querySelector(".profile__name");
 const profileAboutMe = profile.querySelector(".profile__about-me");
@@ -44,22 +46,23 @@ initialCards.forEach(card => {
   const newPlace = newPlaceTemplate.querySelector(".element").cloneNode(true);
   const cardGarbageButton = newPlace.querySelector(".element__garbage-button");
   const cardImage = newPlace.querySelector(".element__image");
+  const cardName = newPlace.querySelector(".element__name");
   const cardLikeButton = newPlace.querySelector(".element__like-button");
-  newPlace.querySelector(".element__name").textContent = card.name;
-  newPlace.querySelector(".element__image").src = card.link;
+  cardImage.src = card.link;
+  cardName.textContent = card.name;
   placesContainer.append(newPlace);
+  cardGarbageButton.addEventListener("click", () => {
+    newPlace.remove();
+  });
   cardImage.addEventListener("click", () => {
-    cardImage.classList.toggle("element__image_salient");
-    allButtons.disabled = false;
-    if (cardImage.classList.contains("element__image_salient")){
-      allButtons.disabled = true;
-    }
+    popupImageBackground.style.backgroundImage = "url("+ cardImage.src +")";
+    popupImage.classList.add("popup-image_active");
+  });
+  popupImageCloseButton.addEventListener("click", () => {
+    popupImage.classList.remove("popup-image_active");
   });
   cardLikeButton.addEventListener("click", () => {
     cardLikeButton.classList.toggle("element__like-button_active");
-  });
-  cardGarbageButton.addEventListener("click", () => {
-    newPlace.remove();
   });
   /* singleNewPlace(); */ 
 })
@@ -71,11 +74,18 @@ function singleNewPlace(){
   const cardLikeButton = newPlace.querySelector(".element__like-button");
   newPlace.querySelector(".element__name").textContent = nameInput.value;
   newPlace.querySelector(".element__image").src = aboutMeInput.value;
-  cardLikeButton.addEventListener("click", () => {
-    cardLikeButton.classList.toggle("element__like-button_active");
-  });
   cardGarbageButton.addEventListener("click", () => {
     newPlace.remove();
+  });
+  cardImage.addEventListener("click", () => {
+    popupImageBackground.style.backgroundImage = "url("+ cardImage.src +")";
+    popupImage.classList.add("popup-image_active");
+  });
+  popupImageCloseButton.addEventListener("click", () => {
+    popupImage.classList.remove("popup-image_active");
+  });
+  cardLikeButton.addEventListener("click", () => {
+    cardLikeButton.classList.toggle("element__like-button_active");
   });
   return newPlace;
 }

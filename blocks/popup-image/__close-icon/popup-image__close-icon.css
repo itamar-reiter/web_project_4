@@ -1,0 +1,25 @@
+.popup-image__close-icon{
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  float: right;
+  transform: translate(calc(100% + 4px),calc(-100% - 4px));
+  background: url(../../../images/Close-Icon.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  opacity: 1;
+  transition-property: opacity;
+  transition-timing-function: ease-in;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+.popup-image__close-icon:hover{
+  opacity: 0.6;
+}
+@media (max-width: 500px){
+  .popup-image__close-icon{
+    width: 30px;
+    height: 30px;
+  }
+}
