@@ -1,52 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
-    <title>Around the U.S</title>
-    <link rel="stylesheet" href="pages/index.css" />
-  </head>
-  <body class="page">
-    <div class="popup-image">
-      <div class="popup-image__background">
-        <button type="button" id="popup-image__close-icon" class="popup-image__close-icon"></button>
-      </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+  <title>Around the U.S</title>
+  <link rel="stylesheet" href="pages/index.css" />
+</head>
+
+<body class="page">
+  <header class="header">
+    <div class="header__logo"></div>
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img class="profile__image" src="images/profile_image.jpg" alt="jacques'es image" />
+      <h1 class="profile__name">Jacques Cousteau</h1>
+      <button type="button" id="editButton" class="profile__edit-button"></button>
+      <p class="profile__about-me">Explorer</p>
+      <button type="button" id="addButton" class="profile__add-button"></button>
+    </section>
+    <section class="grid-elements"></section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">© 2021 Around The U.S.</p>
+  </footer>
+  <div class="popup popup_type_edit-profile popup_active">
+    <div class="popup__container">
+      <button type="button" id="close-icon" class="popup__close-icon popup__close-icon_type_form"></button>
+      <h2 class="popup__title">Edit profile</h2>
+      <form class="popup__form">
+        <input class="popup__input" type="text" name="name" id="name" placeholder="Name" />
+        <input class="popup__input" type="text" name="about-me" id="about-me" placeholder="About me" />
+        <button type="submit" id="save-Button" class="popup__submit-button">Save</button>
+      </form>
     </div>
-    <header class="header">
-      <div class="header__logo"></div>
-    </header>
-    <main class="content">
-      <section class="profile">
-        <img class="profile__image" src="images\WhatsApp Image 2022-01-25 at 23.57.32.jpeg" alt="jacques'es image" />
-        <h1 class="profile__name">Jacques Cousteau</h1>
-        <button type="button" id="editButton" class="profile__edit-button"></button>
-        <p class="profile__about-me">Explorer</p>
-        <button type="button" id="addButton" class="profile__add-button"></button>
-      </section>
-      <section class="grid-elements"></section>
-      <section class="popup-edit">
-        <div class="popup-edit__form">
-          <button type="button" id="close-icon" class="popup-edit__close-icon"></button>
-          <h2 class="popup-edit__title"></h2>
-          <form class="form">
-            <input class="form__input" type="text" name="name" id="name" placeholder="" />
-            <input class="form__input" type="text" name="about-me" id="about-me" placeholder="" />
-            <button type="submit" id="submitButton" class="form__save-button"></button>
-          </form>
-        </div>
-      </section>
-    </main>
-    <footer class="footer">
-      <p class="footer__copyright">© 2021 Around The U.S.</p>
-    </footer>
-    <template id="newPlaceTemplate">
-      <div class="element">
-        <button type="button" class="element__garbage-button"></button>
-        <img class="element__image" src=" " />
-        <h2 class="element__name"></h2>
-        <button type="button" class="element__like-button"></button>
-      </div>
-    </template>
-    <script src="script/script.js"></script>
-  </body>
+  </div>
+  <div class="popup popup_type_add-photo">
+    <div class="popup__container">
+      <button type="button" class="popup__close-icon popup__close-icon_type_form"></button>
+      <h2 class="popup__title">New place</h2>
+      <form class="popup__form">
+        <input class="popup__input" type="text" name="title" id="title" placeholder="Title" />
+        <input class="popup__input" type="text" name="image-link" id="image-link" placeholder="Image link" />
+        <button type="submit" id="create-Button" class="popup__submit-button">Create</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_image">
+    <div class="popup__background">
+      <button type="button" class="popup__close-icon popup__close-icon_type_image"></button>
+      <p class="popup__place-name"></p>
+    </div>
+  </div>
+  <template id="newPlaceTemplate">
+    <div class="element">
+      <button type="button" class="element__garbage-button"></button>
+      <img class="element__image" src=" " />
+      <h2 class="element__name"></h2>
+      <button type="button" class="element__like-button"></button>
+    </div>
+  </template>
+  <script src="script/index.js"></script>
+</body>
+
 </html>

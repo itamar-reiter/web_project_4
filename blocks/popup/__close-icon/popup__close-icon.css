@@ -1,9 +1,9 @@
-.popup-image__close-icon{
+.popup__close-icon{
   width: 40px;
   height: 40px;
+  margin:0;
   padding: 0;
   float: right;
-  transform: translate(calc(100% + 4px),calc(-100% - 4px));
   background: url(../../../images/Close-Icon.svg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -14,12 +14,6 @@
   transition-duration: 0.3s;
   cursor: pointer;
 }
-.popup-image__close-icon:hover{
+.popup__close-icon:hover{
   opacity: 0.6;
-}
-@media (max-width: 500px){
-  .popup-image__close-icon{
-    width: 30px;
-    height: 30px;
-  }
 }

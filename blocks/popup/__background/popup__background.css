@@ -1,4 +1,4 @@
-.popup-image__background{
+.popup__background{
   min-height: 400px;
   min-width: 750px;
   max-width: 75vw;
@@ -6,7 +6,7 @@
   background-size: 100% 100%;
 }
 @media (max-width: 1000px){
-  .popup-image__background{
+  .popup__background{
   min-width: 75vw;
   min-height: 60vh;
   }
