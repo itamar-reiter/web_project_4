@@ -47,13 +47,16 @@
           class="popup__close-icon popup__close-icon_type_form"
         ></button>
         <h2 class="popup__title">Edit profile</h2>
-        <form class="popup__form popup__form_type_edit-profile">
+        <form class="popup__form popup__form_type_edit-profile" novalidate>
           <input
             class="popup__input popup__input_type_name"
             type="text"
             name="name"
             id="name"
             placeholder="Name"
+            minlength="2"
+            maxlength="40"
+            required
           />
           <input
             class="popup__input popup__input_type_about-me"
@@ -61,6 +64,9 @@
             name="about-me"
             id="about-me"
             placeholder="About me"
+            minlength="2"
+            maxlength="200"
+            required
           />
           <button type="submit" id="save-button" class="popup__submit-button">
             Save
@@ -83,13 +89,17 @@
             name="title"
             id="title"
             placeholder="Title"
+            minlength="1"
+            maxlength="30"
+            required
           />
           <input
             class="popup__input popup__input_type_image-link"
-            type="text"
+            type="url"
             name="image-link"
             id="image-link"
             placeholder="Image link"
+            required
           />
           <button type="submit" id="create-button" class="popup__submit-button">
             Create
