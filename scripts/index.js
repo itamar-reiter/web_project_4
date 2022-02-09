@@ -116,7 +116,6 @@ addButton.addEventListener("click", () => {
 popupAddPhotoCloseButton.addEventListener("click", () => {
   closePopup(popupAddPhoto);
 });
-overlayList.forEach(overlay => {
-  overlay.addEventListener("click" ,closeOverlay);
+overlayList.forEach((overlay) => {
+  overlay.addEventListener("click", closeOverlay);
 });
-
