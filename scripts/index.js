@@ -4,6 +4,7 @@ const profileAboutMe = profile.querySelector(".profile__about-me");
 const editButton = profile.querySelector("#editButton");
 const addButton = profile.querySelector("#addButton");
 const placesContainer = document.querySelector(".grid-elements");
+const overlayList = Array.from(document.querySelectorAll(".popup"));
 const popupEditProfile = document.querySelector(".popup_type_edit-profile");
 const popupEditProfileCloseButton = popupEditProfile.querySelector(
   ".popup__close-icon_type_form"
@@ -87,6 +88,11 @@ function closePopup(popup) {
   popup.classList.remove("popup_active");
 }
 
+function closeOverlay(evt) {
+  console.log(evt.target);
+  closePopup(evt.target);
+}
+
 initialCards.forEach((card) => {
   placesContainer.append(createCard(card.name, card.link));
 });
@@ -109,5 +115,8 @@ addButton.addEventListener("click", () => {
 /* popupFormAddPhoto.addEventListener("submit", handleCardFormSubmit); */
 popupAddPhotoCloseButton.addEventListener("click", () => {
   closePopup(popupAddPhoto);
+});
+overlayList.forEach(overlay => {
+  overlay.addEventListener("click" ,closeOverlay);
 });
 
