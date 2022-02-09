@@ -1,66 +1,69 @@
 /* check if singal input is valid */
-/* true if valid */
-const checkInputValidity = (popupForm, inputElement) => {
+/* activate the error notes toggeling functions */
+const checkInputValidity = (formElement, inputElement) => {
   if (!inputElement.validity.valid){
-    apllyErrorNotes(popupForm, inputElement, inputElement.validationMeassage);
+    apllyErrorNotes(formElement, inputElement, inputElement.validationMessage);
+    console.log(inputElement.validationMessage);
   }
   else {
-    removeErrorNotes(popupForm, inputElement);
+    removeErrorNotes(formElement, inputElement);
   }
 }
 
 /* check if there invalid input in chosen form */
 /* true if there is invalid input */
-const hasInvalidInput = (inputList) => { 
-  return inputList.some(inputElement => {
+const hasInvalidInput = (formInputs) => { 
+  return formInputs.some(inputElement => {
     return !inputElement.validity.valid;
   })
 }
 
-
+/* applying error message and input errorAlert */
 const apllyErrorNotes = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.popup__error-message_type_${inputElement.id}`);
   inputElement.classList.add("popup__input_type_error");
+  errorElement.classList.add("popup__error-message_active");
   errorElement.textContent = errorMessage;
 }
+
+/* removing error message and input errorAlert */
 const removeErrorNotes = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.popup__error-message_type_${inputElement.id}`);
   inputElement.classList.remove("popup__input_type_error");
   errorElement.textContent = "";
+  errorElement.classList.remove("popup__error-message_active");
 }
-const toggleSubmitButton = (inputList, submitButton) => {
-  console.log(hasInvalidInput(inputList));
-  if (hasInvalidInput(inputList)){
+
+/* toggle submit button state; style and funcionality */
+const toggleSubmitButton = (formInputs, submitButton) => {
+  console.log(hasInvalidInput(formInputs));
+  if (hasInvalidInput(formInputs)){
     submitButton.classList.add("popup__submit-button_inactive");
+    submitButton.disabled = true;
+    console.log("button inactive");
   }
   else {
     submitButton.classList.remove("popup__submit-button_inactive");
+    submitButton.disabled = false;
+    console.log("button active");
   }
 }
 
+/* add input event listeners and restart button state */
 const adjustEventListeners = (formElement) => {
   const formInputs = Array.from(formElement.querySelectorAll(".popup__input")); /*make inputs array inside chosen formElement */
   const submitButton = formElement.querySelector(".popup__submit-button");
   toggleSubmitButton(formInputs, submitButton);
-  formInputs.forEach((inputElement) => {   /*  for all inputs, add event listeners */
+  formInputs.forEach((inputElement) => {  
     inputElement.addEventListener("input", () => {
-      checkInputValidity(inputElement);
+      checkInputValidity(formElement, inputElement);
       toggleSubmitButton(formInputs, submitButton);
-      /* check validity */
-      /* if true, remove error notes */
-      /* if false, add error notes */
     });
   });
 }
 
-
-const enableValidation = (handleFormSubmitFunction) => {
-  const formList = Array.from(document.querySelectorAll(".popup__form"));
-  formList.forEach(formElement => {
+/* enables the chosen form validtion */
+const enableValidation = (formElement, handleFormSubmitFunction) => {
     formElement.addEventListener("submit", handleFormSubmitFunction);
     adjustEventListeners(formElement);
-  });
 }
-/* enableValidation(handleProfileFormSubmit(evt));
-enableValidation(handleCardFormSubmit(evt)); */
-

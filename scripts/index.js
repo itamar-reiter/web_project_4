@@ -94,15 +94,20 @@ initialCards.forEach((card) => {
 popupImageCloseButton.addEventListener("click", () => {
   closePopup(popupImage);
 });
-editButton.addEventListener("click", openEditProfilePopup);
-popupFormEditProfile.addEventListener("submit", handleProfileFormSubmit);
+editButton.addEventListener("click", () => {
+  openEditProfilePopup();
+  enableValidation(popupFormEditProfile, handleProfileFormSubmit);
+});
+/* popupFormEditProfile.addEventListener("submit", handleProfileFormSubmit); */
 popupEditProfileCloseButton.addEventListener("click", () => {
   closePopup(popupEditProfile);
 });
 addButton.addEventListener("click", () => {
   openPopup(popupAddPhoto);
+  enableValidation(popupFormAddPhoto, handleCardFormSubmit);
 });
-popupFormAddPhoto.addEventListener("submit", handleCardFormSubmit);
+/* popupFormAddPhoto.addEventListener("submit", handleCardFormSubmit); */
 popupAddPhotoCloseButton.addEventListener("click", () => {
   closePopup(popupAddPhoto);
 });
+
