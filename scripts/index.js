@@ -62,6 +62,19 @@ function addContentPopupImage(cardImage, placeName) {
 
 function openPopup(popup) {
   popup.classList.add("popup_active");
+  document.addEventListener("keydown", (evt) =>  {closeWithEsc(evt, popup)});
+}
+
+function closePopup(popup) {
+  popup.classList.remove("popup_active");
+  document.removeEventListener("keydown", (evt) =>  {closeWithEsc(evt, popup)});
+  console.log("escape listener removed");
+} 
+
+function closeWithEsc(evt, popup) {
+  if(evt.key === "Escape") {
+    closePopup(popup);
+  }
 }
 
 function openEditProfilePopup() {
@@ -84,10 +97,6 @@ function handleCardFormSubmit(evt) {
   popupFormAddPhoto.reset();
 }
 
-function closePopup(popup) {
-  popup.classList.remove("popup_active");
-}
-
 function closeOverlay(evt) {
   console.log(evt.target);
   closePopup(evt.target);
@@ -104,7 +113,6 @@ editButton.addEventListener("click", () => {
   openEditProfilePopup();
   enableValidation(popupFormEditProfile, handleProfileFormSubmit);
 });
-/* popupFormEditProfile.addEventListener("submit", handleProfileFormSubmit); */
 popupEditProfileCloseButton.addEventListener("click", () => {
   closePopup(popupEditProfile);
 });
@@ -112,7 +120,6 @@ addButton.addEventListener("click", () => {
   openPopup(popupAddPhoto);
   enableValidation(popupFormAddPhoto, handleCardFormSubmit);
 });
-/* popupFormAddPhoto.addEventListener("submit", handleCardFormSubmit); */
 popupAddPhotoCloseButton.addEventListener("click", () => {
   closePopup(popupAddPhoto);
 });
