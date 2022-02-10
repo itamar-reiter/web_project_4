@@ -68,7 +68,6 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove("popup_active");
   document.removeEventListener("keydown", (evt) =>  {closeWithEsc(evt, popup)});
-  console.log("escape listener removed");
 } 
 
 function closeWithEsc(evt, popup) {
@@ -98,7 +97,6 @@ function handleCardFormSubmit(evt) {
 }
 
 function closeOverlay(evt) {
-  console.log(evt.target);
   closePopup(evt.target);
 }
 

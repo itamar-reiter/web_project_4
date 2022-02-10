@@ -3,7 +3,6 @@
 const checkInputValidity = (formElement, inputElement) => {
   if (!inputElement.validity.valid){
     apllyErrorNotes(formElement, inputElement, inputElement.validationMessage);
-    console.log(inputElement.validationMessage);
   }
   else {
     removeErrorNotes(formElement, inputElement);
@@ -36,16 +35,13 @@ const removeErrorNotes = (formElement, inputElement) => {
 
 /* toggle submit button state; style and funcionality */
 const toggleSubmitButton = (formInputs, submitButton) => {
-  console.log(hasInvalidInput(formInputs));
   if (hasInvalidInput(formInputs)){
     submitButton.classList.add("popup__submit-button_inactive");
     submitButton.disabled = true;
-    console.log("button inactive");
   }
   else {
     submitButton.classList.remove("popup__submit-button_inactive");
     submitButton.disabled = false;
-    console.log("button active");
   }
 }
 
