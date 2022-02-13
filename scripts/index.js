@@ -86,9 +86,13 @@ function closeWithEsc(evt, popup) {
   }
 }
 
-function openEditProfilePopup() {
+function addInputsFormEditProfile(){
   nameInput.value = profileName.textContent;
   aboutMeInput.value = profileAboutMe.textContent;
+}
+
+function openEditProfilePopup() {
+  addInputsFormEditProfile();
   openPopup(popupEditProfile);
 }
 
@@ -115,20 +119,29 @@ initialCards.forEach((card) => {
 popupImageCloseButton.addEventListener("click", () => {
   closePopup(popupImage);
 });
+
+addInputsFormEditProfile();
+
 editButton.addEventListener("click", () => {
   openEditProfilePopup();
 });
+
 popupEditProfileSubmitButton.addEventListener("click", handleProfileFormSubmit);
+
 popupEditProfileCloseButton.addEventListener("click", () => {
   closePopup(popupEditProfile);
 });
+
 addButton.addEventListener("click", () => {
   openPopup(popupAddPhoto);
 });
+
 popupAddPhotoSubmitButton.addEventListener("click", handleCardFormSubmit);
+
 popupAddPhotoCloseButton.addEventListener("click", () => {
   closePopup(popupAddPhoto);
 });
+
 overlayList.forEach((overlay) => {
   overlay.addEventListener("click", closeOverlay);
 });
