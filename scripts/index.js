@@ -76,25 +76,23 @@ function toggleCardLikeButton(cardLikeButton) {
 
 function openPopup(popup) {
   popup.classList.add("popup_active");
-  document.addEventListener("keydown", (evt) => {
-    closeWithEsc(evt, popup);
-  });
+  document.addEventListener("keydown", closeWithEsc);
 }
 
 function closePopup(popup) {
+  document.removeEventListener("keydown", closeWithEsc);
   popup.classList.remove("popup_active");
-  document.removeEventListener("keydown", (evt) => {
-    closeWithEsc(evt, popup);
-  });
+  console.log("closePopupActivate");
 }
 
-function closeWithEsc(evt, popup) {
+function closeWithEsc(evt) {
+  const popup = document.querySelector(".popup_active");
   if (evt.key === "Escape") {
     closePopup(popup);
   }
 }
 
-function addInputsFormEditProfile(){
+function addInputsFormEditProfile() {
   nameInput.value = profileName.textContent;
   aboutMeInput.value = profileAboutMe.textContent;
 }
