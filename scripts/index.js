@@ -45,16 +45,20 @@ function createCard(placeName, placePhoto) {
   cardImage.alt = placeName;
   cardImage.src = placePhoto;
   cardGarbageButton.addEventListener("click", () => {
-    card.remove();
+    removeCard(card);
   });
   cardImage.addEventListener("click", () => {
     addContentPopupImage(cardImage, placeName);
     openPopup(popupImage);
   });
   cardLikeButton.addEventListener("click", () => {
-    cardLikeButton.classList.toggle("element__like-button_active");
+    toggleCardLikeButton(cardLikeButton);
   });
   return card;
+}
+
+function removeCard(card) {
+  card.remove();
 }
 
 function addContentPopupImage(cardImage, placeName) {
@@ -64,6 +68,10 @@ function addContentPopupImage(cardImage, placeName) {
     cardImage.src +
     `)`;
   popupPlaceName.textContent = placeName;
+}
+
+function toggleCardLikeButton(cardLikeButton) {
+  cardLikeButton.classList.toggle("element__like-button_active");
 }
 
 function openPopup(popup) {

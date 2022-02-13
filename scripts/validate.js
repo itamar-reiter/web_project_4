@@ -1,3 +1,8 @@
+/* -------------------------------------------------------------------------- */
+/*                               Form validation                              */
+/* -------------------------------------------------------------------------- */
+
+
 /* check if singal input is valid */
 /* activate the error notes toggeling functions */
 const checkInputValidity = (formElement, inputElement, settings) => {
@@ -61,7 +66,6 @@ const adjustEventListeners = (formElement, settings) => {
 /* enables the chosen form validtion */
 const enableValidation = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
-  console.log(settings);
   formList.forEach(formElement => {
     formElement.addEventListener("submit", evt => {
       evt.preventDefault();
