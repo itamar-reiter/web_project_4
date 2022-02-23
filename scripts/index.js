@@ -1,5 +1,6 @@
 import cards from "./cards.js";
 import Card from "./Card.js";
+import executeFormValidation from "./FormValidator.js";
 const profile = document.querySelector(".profile");
 const profileName = profile.querySelector(".profile__name");
 const profileAboutMe = profile.querySelector(".profile__about-me");
@@ -63,7 +64,6 @@ function openPopup(popup) {
 function closePopup(popup) {
   document.removeEventListener("keydown", closeWithEsc);
   popup.classList.remove("popup_active");
-  console.log("closePopupActivate");
 }
 
 function closeWithEsc(evt) {
