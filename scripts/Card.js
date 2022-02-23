@@ -26,8 +26,8 @@ class Card{
     this._imageContainer.src = this._image;
   }
   _setEventListeners(){
-    this._garbageButton.addEventListener("click", this._removeCard);
-    this._likeButton.addEventListener("click", this._toggleCardLikeButton);
+    this._garbageButton.addEventListener("click", () => {this._removeCard();});
+    this._likeButton.addEventListener("click", () => {this._toggleCardLikeButton();});
     /* this._imageContainer.addEventListener("click", ) */
   }
   _removeCard() {
@@ -40,7 +40,7 @@ class Card{
     this._getTemplate();
     this._defineCardVariables();
     this._addDataToCard();
-    this._setEventListeners;
+    this._setEventListeners();
 
     return this._card;
   }
