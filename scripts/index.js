@@ -36,33 +36,11 @@ const popupImageCloseButton = document.querySelector(
 const popupBackground = popupImage.querySelector(".popup__background");
 const popupPlaceName = popupImage.querySelector(".popup__place-name");
 
-/* const cardTemplate = document.querySelector("#cardTemplate").content;
-
-function createCard(placeName, placePhoto) {
-  const card = cardTemplate.querySelector(".element").cloneNode(true);
-  const cardGarbageButton = card.querySelector(".element__garbage-button");
-  const cardImage = card.querySelector(".element__image");
-  const cardName = card.querySelector(".element__name");
-  const cardLikeButton = card.querySelector(".element__like-button");
-  cardName.textContent = placeName;
-  cardImage.alt = placeName;
-  cardImage.src = placePhoto;
-  cardGarbageButton.addEventListener("click", () => {
-    removeCard(card);
-  });
+/*
   cardImage.addEventListener("click", () => {
     addContentPopupImage(cardImage, placeName);
     openPopup(popupImage);
   });
-  cardLikeButton.addEventListener("click", () => {
-    toggleCardLikeButton(cardLikeButton);
-  });
-  return card;
-}
-
-function removeCard(card) {
-  card.remove();
-}
 
 function addContentPopupImage(cardImage, placeName) {
   popupBackground.style.backgroundImage =
@@ -71,10 +49,6 @@ function addContentPopupImage(cardImage, placeName) {
     cardImage.src +
     `)`;
   popupPlaceName.textContent = placeName;
-}
-
-function toggleCardLikeButton(cardLikeButton) {
-  cardLikeButton.classList.toggle("element__like-button_active");
 } */
 
 //call Card class
