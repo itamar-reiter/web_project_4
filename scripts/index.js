@@ -90,7 +90,7 @@ function handleProfileFormSubmit() {
 }
 
 function handleCardFormSubmit() {
-  placesContainer.prepend(createCard(titleInput.value, imageLinkInput.value));
+  placesContainer.prepend(new Card(titleInput.value, imageLinkInput.value, "#cardTemplate").generateCard());
   closePopup(popupAddPhoto);
   popupFormAddPhoto.reset();
 }
