@@ -1,3 +1,5 @@
+import cards from "./cards.js";
+import Card from "./Card.js";
 const profile = document.querySelector(".profile");
 const profileName = profile.querySelector(".profile__name");
 const profileAboutMe = profile.querySelector(".profile__about-me");
@@ -33,7 +35,8 @@ const popupImageCloseButton = document.querySelector(
 );
 const popupBackground = popupImage.querySelector(".popup__background");
 const popupPlaceName = popupImage.querySelector(".popup__place-name");
-const cardTemplate = document.querySelector("#cardTemplate").content;
+
+/* const cardTemplate = document.querySelector("#cardTemplate").content;
 
 function createCard(placeName, placePhoto) {
   const card = cardTemplate.querySelector(".element").cloneNode(true);
@@ -72,7 +75,11 @@ function addContentPopupImage(cardImage, placeName) {
 
 function toggleCardLikeButton(cardLikeButton) {
   cardLikeButton.classList.toggle("element__like-button_active");
-}
+} */
+
+//call Card class
+
+
 
 function openPopup(popup) {
   popup.classList.add("popup_active");
@@ -118,8 +125,8 @@ function closeOverlay(evt) {
   closePopup(evt.target);
 }
 
-initialCards.forEach((card) => {
-  placesContainer.append(createCard(card.name, card.link));
+cards.forEach((card) => {
+  placesContainer.append(new Card(card.link, card.name, "#cardTemplate").generateCard());
 });
 
 popupImageCloseButton.addEventListener("click", () => {
