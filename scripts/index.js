@@ -1,6 +1,14 @@
 import cards from "./cards.js";
 import Card from "./Card.js";
-import executeFormValidation from "./FormValidator.js";
+import FormValidator from "./FormValidator.js";
+const formValidatorData = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inactiveButtonClass: "popup__submit-button_inactive",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error-message_active",
+};
 const profile = document.querySelector(".profile");
 const profileName = profile.querySelector(".profile__name");
 const profileAboutMe = profile.querySelector(".profile__about-me");
@@ -36,7 +44,6 @@ const popupImageCloseButton = document.querySelector(
 );
 const popupBackground = popupImage.querySelector(".popup__background");
 const popupPlaceName = popupImage.querySelector(".popup__place-name");
-
 /*
   cardImage.addEventListener("click", () => {
     addContentPopupImage(cardImage, placeName);
@@ -111,6 +118,7 @@ addInputsFormEditProfile();
 
 editButton.addEventListener("click", () => {
   openEditProfilePopup();
+  const popupFormEditProfileValidator = new FormValidator(formValidatorData, popupFormEditProfile).enableValidation();
 });
 
 popupEditProfileSubmitButton.addEventListener("click", handleProfileFormSubmit);
@@ -121,6 +129,7 @@ popupEditProfileCloseButton.addEventListener("click", () => {
 
 addButton.addEventListener("click", () => {
   openPopup(popupAddPhoto);
+  const popupFormAddPhotoValidator = new FormValidator(formValidatorData, popupFormAddPhoto).enableValidation();
 });
 
 popupAddPhotoSubmitButton.addEventListener("click", handleCardFormSubmit);

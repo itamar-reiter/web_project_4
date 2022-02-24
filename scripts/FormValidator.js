@@ -1,11 +1,12 @@
 class FormValidator {
   constructor(data, formElement) {
-    this._formSelector = ".popup__form";
-    this._inputSelector = ".popup__input";
-    this._submitButtonSelector = ".popup__submit-button";
-    this._inactiveButtonClass = "popup__submit-button_inactive";
-    this._inputErrorClass = "popup__input_type_error";
-    this._errorClass = "popup__error-message_active";
+    this._formSelector = data.formSelector;
+    this._inputSelector = data.inputSelector;
+    this._submitButtonSelector = data.submitButtonSelector;
+    this._inactiveButtonClass = data.inactiveButtonClass;
+    this._inputErrorClass = data.inputErrorClass;
+    this._errorClass = data.errorClass;
+    this._formElement = formElement;
   }
 
   /* removing error message and input errorAlert */
@@ -76,14 +77,11 @@ class FormValidator {
   }
 
   enableValidation() {
-    this._formList = Array.from(document.querySelectorAll(this._formSelector));
-    this._formList.forEach((formElement) => {
-      formElement.addEventListener("submit", (evt) => {
+      this._formElement.addEventListener("submit", (evt) => {
         evt.preventDefault();
       });
-      this._adjustEventListeners(formElement);
-    });
+      this._adjustEventListeners(this._formElement);
   }
 }
-const executeFormValidation = new FormValidator().enableValidation();
-export default executeFormValidation;
+
+export default FormValidator;
