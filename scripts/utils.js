@@ -152,9 +152,10 @@ function setEventListeners(Card) {
 }
 
 function initFormValidating(FormValidator) {
-  new FormValidator(formValidatorData, popupFormEditProfile).enableValidation();
-
-  new FormValidator(formValidatorData, popupFormAddPhoto).enableValidation();
+  const formList = Array.from(document.querySelectorAll(".popup__form"));
+  formList.forEach(formElement => {
+    new FormValidator(formValidatorData, formElement).enableValidation();
+  })
 }
 
 function initialRenderCard(cards, CardClass) {
