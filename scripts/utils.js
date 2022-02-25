@@ -36,9 +36,17 @@ const popupImageCloseButton = document.querySelector(
 );
 const popupBackground = popupImage.querySelector(".popup__background");
 const popupPlaceName = popupImage.querySelector(".popup__place-name");
-
+const formValidatorData = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inactiveButtonClass: "popup__submit-button_inactive",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error-message_active",
+};
 //call Card class
 
+//internal functions (for internal use)
 function openPopup(popup) {
   popup.classList.add("popup_active");
   document.addEventListener("keydown", closeWithEsc);
@@ -54,6 +62,10 @@ function closeWithEsc(evt) {
   if (evt.key === "Escape") {
     closePopup(popup);
   }
+}
+
+function closeOverlay(evt) {
+  closePopup(evt.target);
 }
 
 function openEditProfilePopup() {
@@ -78,15 +90,16 @@ function handleCardFormSubmit(Card) {
       titleInput.value,
       imageLinkInput.value,
       "#cardTemplate",
-      openPopupImage,
+      openPopupImage
     ).generateCard()
   );
   closePopup(popupAddPhoto);
   popupFormAddPhoto.reset();
 }
 
-function closeOverlay(evt) {
-  closePopup(evt.target);
+function openPopupImage(cardName, cardImage) {
+  openPopup(popupImage);
+  addContentPopupImage(cardName, cardImage);
 }
 
 function addContentPopupImage(cardName, cardImage) {
@@ -98,19 +111,12 @@ function addContentPopupImage(cardName, cardImage) {
   popupPlaceName.textContent = cardName;
 }
 
-function openPopupImage(cardName, cardImage) {
-  openPopup(popupImage);
-  addContentPopupImage(cardName, cardImage);
-}
-
-function setEventListeners(FormValidator, formValidatorData, Card) {
+//exported functions
+function setEventListeners(Card) {
   //edit button event listeners
+  addInputsFormEditProfile();
   editButton.addEventListener("click", () => {
     openEditProfilePopup();
-    const popupFormEditProfileValidator = new FormValidator(
-      formValidatorData,
-      popupFormEditProfile
-    ).enableValidation();
     console.log("edit popup open");
   });
   popupEditProfileSubmitButton.addEventListener(
@@ -125,14 +131,12 @@ function setEventListeners(FormValidator, formValidatorData, Card) {
   //add button event listeners
   addButton.addEventListener("click", () => {
     openPopup(popupAddPhoto);
-    const popupFormAddPhotoValidator = new FormValidator(
-      formValidatorData,
-      popupFormAddPhoto
-    ).enableValidation();
     console.log("add photo popup open");
   });
 
-  popupAddPhotoSubmitButton.addEventListener("click", () => {handleCardFormSubmit(Card);});
+  popupAddPhotoSubmitButton.addEventListener("click", () => {
+    handleCardFormSubmit(Card);
+  });
 
   popupAddPhotoCloseButton.addEventListener("click", () => {
     closePopup(popupAddPhoto);
@@ -146,4 +150,29 @@ function setEventListeners(FormValidator, formValidatorData, Card) {
     overlay.addEventListener("click", closeOverlay);
   });
 }
-export { openPopupImage, setEventListeners, handleCardFormSubmit, placesContainer};
+
+function initFormValidating(FormValidator, formValidatorData) {
+  new FormValidator(formValidatorData, popupFormEditProfile).enableValidation();
+
+  new FormValidator(formValidatorData, popupFormAddPhoto).enableValidation();
+}
+
+function initialRenderCard(cards, CardClass) {
+  cards.forEach((card) => {
+    placesContainer.append(
+      new CardClass(
+        card.link,
+        card.name,
+        "#cardTemplate",
+        openPopupImage
+      ).generateCard()
+    );
+  });
+}
+
+export {
+  setEventListeners,
+  initFormValidating,
+  formValidatorData,
+  initialRenderCard,
+};
