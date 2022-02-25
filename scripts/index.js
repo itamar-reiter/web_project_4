@@ -4,9 +4,8 @@ import FormValidator from "./FormValidator.js";
 import {
   setEventListeners,
   initFormValidating,
-  formValidatorData,
   initialRenderCard,
 } from "./Utils.js";
 initialRenderCard(cards, Card);
 setEventListeners(Card);
-initFormValidating(FormValidator, formValidatorData);
+initFormValidating(FormValidator);

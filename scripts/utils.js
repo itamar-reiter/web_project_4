@@ -44,9 +44,8 @@ const formValidatorData = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error-message_active",
 };
-//call Card class
 
-//internal functions (for internal use)
+//internal functions (for internal use)//
 function openPopup(popup) {
   popup.classList.add("popup_active");
   document.addEventListener("keydown", closeWithEsc);
@@ -111,7 +110,8 @@ function addContentPopupImage(cardName, cardImage) {
   popupPlaceName.textContent = cardName;
 }
 
-//exported functions
+//exported functions//
+
 function setEventListeners(Card) {
   //edit button event listeners
   addInputsFormEditProfile();
@@ -151,7 +151,7 @@ function setEventListeners(Card) {
   });
 }
 
-function initFormValidating(FormValidator, formValidatorData) {
+function initFormValidating(FormValidator) {
   new FormValidator(formValidatorData, popupFormEditProfile).enableValidation();
 
   new FormValidator(formValidatorData, popupFormAddPhoto).enableValidation();
@@ -170,9 +170,4 @@ function initialRenderCard(cards, CardClass) {
   });
 }
 
-export {
-  setEventListeners,
-  initFormValidating,
-  formValidatorData,
-  initialRenderCard,
-};
+export { setEventListeners, initFormValidating, initialRenderCard };
