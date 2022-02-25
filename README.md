@@ -24,7 +24,7 @@ images are from around the U.S, and they are at the images folder
 
 Tech that were used: We used grid and flexbox displays for items-location, and media queries for the project's-resnposivity. We used BEM structure for organizing the files.
 we used JavaScript functions such as addEventListener for managing the profile's name, the images etc.
-everything organized at JS modules, and connected through 'index.js' file
+everything organized at JS modules, and connected through 'index.js' file.
 
 **Link**
 
