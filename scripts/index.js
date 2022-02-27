@@ -87,7 +87,6 @@ function setEventListeners(Card) {
   addInputsFormEditProfile();
   constants.editButton.addEventListener("click", () => {
     openEditProfilePopup();
-    console.log("edit popup open");
   });
   constants.popupFormEditProfile.addEventListener("submit", (evt) => {
     evt.preventDefault();
@@ -101,7 +100,6 @@ function setEventListeners(Card) {
   //add button event listeners
   constants.addButton.addEventListener("click", () => {
     openPopup(constants.popupAddPhoto);
-    console.log("add photo popup open");
   });
 
   constants.popupFormAddPhoto.addEventListener("submit", (evt) => {

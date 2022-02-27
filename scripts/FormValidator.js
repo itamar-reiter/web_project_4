@@ -41,18 +41,15 @@ class FormValidator {
 
   _hasInvalidInput() {
     return this._formInputs.some((inputElement) => {
-      console.log(!inputElement.validity.valid);
       return !inputElement.validity.valid;
     });
   }
 
   _toggleSubmitButton() {
     if (this._hasInvalidInput()) {
-      console.log("has invaild input");
       this._submitButton.classList.add(this._inactiveButtonClass);
       this._submitButton.disabled = true;
     } else {
-      console.log("no invalid input");
       this._submitButton.classList.remove(this._inactiveButtonClass);
       this._submitButton.disabled = false;
     }
