@@ -8,7 +8,9 @@ export const placesContainer = document.querySelector(".grid-elements");
 export const overlayList = Array.from(document.querySelectorAll(".popup"));
 
 //variables for popup's content
-export const popupEditProfile = document.querySelector(".popup_type_edit-profile");
+export const popupEditProfile = document.querySelector(
+  ".popup_type_edit-profile"
+);
 export const popupEditProfileCloseButton = popupEditProfile.querySelector(
   ".popup__close-icon_type_form"
 );
@@ -16,7 +18,9 @@ export const popupFormEditProfile = document.querySelector(
   ".popup__form_type_edit-profile"
 );
 export const nameInput = document.querySelector(".popup__input_type_name");
-export const aboutMeInput = document.querySelector(".popup__input_type_about-me");
+export const aboutMeInput = document.querySelector(
+  ".popup__input_type_about-me"
+);
 export const popupEditProfileSubmitButton = popupFormEditProfile.querySelector(
   ".popup__submit-button"
 );
@@ -24,9 +28,13 @@ export const popupAddPhoto = document.querySelector(".popup_type_add-photo");
 export const popupAddPhotoCloseButton = popupAddPhoto.querySelector(
   ".popup__close-icon_type_form"
 );
-export const popupFormAddPhoto = document.querySelector(".popup__form_type_add-photo");
+export const popupFormAddPhoto = document.querySelector(
+  ".popup__form_type_add-photo"
+);
 export const titleInput = document.querySelector(".popup__input_type_title");
-export const imageLinkInput = document.querySelector(".popup__input_type_image-link");
+export const imageLinkInput = document.querySelector(
+  ".popup__input_type_image-link"
+);
 export const popupAddPhotoSubmitButton = popupFormAddPhoto.querySelector(
   ".popup__submit-button"
 );

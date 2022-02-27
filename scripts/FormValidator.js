@@ -30,10 +30,7 @@ class FormValidator {
 
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this._apllyErrorNotes(
-        inputElement,
-        inputElement.validationMessage
-      );
+      this._apllyErrorNotes(inputElement, inputElement.validationMessage);
     } else {
       this._removeErrorNotes(inputElement);
     }
@@ -65,7 +62,9 @@ class FormValidator {
     this._formInputs = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );
-    this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
+    this._submitButton = this._formElement.querySelector(
+      this._submitButtonSelector
+    );
     this._toggleSubmitButton();
     this._formInputs.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
@@ -76,9 +75,6 @@ class FormValidator {
   }
 
   enableValidation() {
-    this._formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
     this._adjustEventListeners();
   }
 }

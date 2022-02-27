@@ -67,7 +67,7 @@ function resetSubmitButtonCardForm() {
 }
 
 function openPopupImage(cardName, cardImage) {
-  openPopup(popupImage);
+  openPopup(constants.popupImage);
   addContentPopupImage(cardName, cardImage);
 }
 
@@ -89,10 +89,10 @@ function setEventListeners(Card) {
     openEditProfilePopup();
     console.log("edit popup open");
   });
-  constants.popupEditProfileSubmitButton.addEventListener(
-    "click",
-    handleProfileFormSubmit
-  );
+  constants.popupFormEditProfile.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    handleProfileFormSubmit();
+  });
 
   constants.popupEditProfileCloseButton.addEventListener("click", () => {
     closePopup(constants.popupEditProfile);
@@ -104,7 +104,8 @@ function setEventListeners(Card) {
     console.log("add photo popup open");
   });
 
-  constants.popupAddPhotoSubmitButton.addEventListener("click", () => {
+  constants.popupFormAddPhoto.addEventListener("submit", (evt) => {
+    evt.preventDefault();
     handleCardFormSubmit(Card);
   });
 
@@ -133,7 +134,9 @@ function initFormValidating(FormValidator) {
 
 function initialRenderCard(cards, CardClass) {
   cards.forEach((card) => {
-    constants.placesContainer.append(createCard(CardClass, card.link, card.name));
+    constants.placesContainer.append(
+      createCard(CardClass, card.link, card.name)
+    );
   });
 }
 
