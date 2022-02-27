@@ -86,14 +86,16 @@ function handleProfileFormSubmit() {
 function handleCardFormSubmit(Card) {
   placesContainer.prepend(
     new Card(
-      titleInput.value,
       imageLinkInput.value,
+      titleInput.value,
       "#cardTemplate",
       openPopupImage
     ).generateCard()
   );
+  console.log(popupAddPhotoSubmitButton.disabled);
   closePopup(popupAddPhoto);
   popupFormAddPhoto.reset();
+
 }
 
 function openPopupImage(cardName, cardImage) {
