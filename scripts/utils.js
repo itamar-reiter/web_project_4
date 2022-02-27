@@ -92,10 +92,15 @@ function handleCardFormSubmit(Card) {
       openPopupImage
     ).generateCard()
   );
-  console.log(popupAddPhotoSubmitButton.disabled);
+  resetSubmitButtonCardForm();
   closePopup(popupAddPhoto);
   popupFormAddPhoto.reset();
 
+}
+
+function resetSubmitButtonCardForm(){
+  popupAddPhotoSubmitButton.disabled = true;
+  popupAddPhotoSubmitButton.classList.add("popup__submit-button_inactive");
 }
 
 function openPopupImage(cardName, cardImage) {
