@@ -10,8 +10,8 @@ class FormValidator {
   }
 
   /* removing error message and input errorAlert */
-  _removeErrorNotes = (formElement, inputElement) => {
-    this._errorElement = formElement.querySelector(
+  _removeErrorNotes = (inputElement) => {
+    this._errorElement = this._formElement.querySelector(
       `.popup__error-message_type_${inputElement.id}`
     );
     inputElement.classList.remove(this._inputErrorClass);
@@ -19,8 +19,8 @@ class FormValidator {
     this._errorElement.classList.remove(this._errorClass);
   };
 
-  _apllyErrorNotes(formElement, inputElement, errorMessage) {
-    this._errorElement = formElement.querySelector(
+  _apllyErrorNotes(inputElement, errorMessage) {
+    this._errorElement = this._formElement.querySelector(
       `.popup__error-message_type_${inputElement.id}`
     );
     inputElement.classList.add(this._inputErrorClass);
@@ -28,50 +28,49 @@ class FormValidator {
     this._errorElement.textContent = errorMessage;
   }
 
-  _checkInputValidity(formElement, inputElement) {
+  _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
       this._apllyErrorNotes(
-        formElement,
         inputElement,
         inputElement.validationMessage
       );
     } else {
-      this._removeErrorNotes(formElement, inputElement);
+      this._removeErrorNotes(inputElement);
     }
   }
 
   /* check if there invalid input in chosen form */
   /* true if there is invalid input */
 
-  _hasInvalidInput(formInputs) {
-    return formInputs.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._formInputs.some((inputElement) => {
       console.log(!inputElement.validity.valid);
       return !inputElement.validity.valid;
     });
   }
 
-  _toggleSubmitButton(formInputs, submitButton) {
-    if (this._hasInvalidInput(formInputs)) {
+  _toggleSubmitButton() {
+    if (this._hasInvalidInput()) {
       console.log("has invaild input");
-      submitButton.classList.add(this._inactiveButtonClass);
-      submitButton.disabled = true;
+      this._submitButton.classList.add(this._inactiveButtonClass);
+      this._submitButton.disabled = true;
     } else {
       console.log("no invalid input");
-      submitButton.classList.remove(this._inactiveButtonClass);
-      submitButton.disabled = false;
+      this._submitButton.classList.remove(this._inactiveButtonClass);
+      this._submitButton.disabled = false;
     }
   }
 
-  _adjustEventListeners(formElement) {
+  _adjustEventListeners() {
     this._formInputs = Array.from(
-      formElement.querySelectorAll(this._inputSelector)
+      this._formElement.querySelectorAll(this._inputSelector)
     );
-    this._submitButton = formElement.querySelector(this._submitButtonSelector);
-    this._toggleSubmitButton(this._formInputs, this._submitButton);
+    this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
+    this._toggleSubmitButton();
     this._formInputs.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        this._checkInputValidity(formElement, inputElement);
-        this._toggleSubmitButton(this._formInputs, this._submitButton);
+        this._checkInputValidity(inputElement);
+        this._toggleSubmitButton();
       });
     });
   }
@@ -80,7 +79,7 @@ class FormValidator {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-    this._adjustEventListeners(this._formElement);
+    this._adjustEventListeners();
   }
 }
 
