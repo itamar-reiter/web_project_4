@@ -21,7 +21,12 @@ function closeWithEsc(evt) {
 }
 
 function closeOverlay(evt) {
-  closePopup(evt.target);
+  if (
+    !evt.target.classList.contains("popup__container") &
+    !evt.target.classList.contains("popup__background")
+  ) {
+    closePopup(evt.target);
+  }
 }
 
 function openEditProfilePopup() {
