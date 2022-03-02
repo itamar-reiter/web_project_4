@@ -21,10 +21,7 @@ function closeWithEsc(evt) {
 }
 
 function closeOverlay(evt) {
-  if (
-    !evt.target.classList.contains("popup__container") &
-    !evt.target.classList.contains("popup__background")
-  ) {
+  if (evt.target === evt.currentTarget) {
     closePopup(evt.target);
   }
 }
@@ -45,11 +42,10 @@ function handleProfileFormSubmit() {
   closePopup(constants.popupEditProfile);
 }
 
-function handleCardFormSubmit(Card) {
+function handleCardFormSubmit() {
   constants.placesContainer.prepend(
     createCard(Card, constants.imageLinkInput.value, constants.titleInput.value)
   );
-  resetSubmitButtonCardForm();
   closePopup(constants.popupAddPhoto);
   constants.popupFormAddPhoto.reset();
 }
@@ -62,13 +58,6 @@ function createCard(Card, cardImage, cardName) {
     openPopupImage
   ).generateCard();
   return newCard;
-}
-
-function resetSubmitButtonCardForm() {
-  constants.popupAddPhotoSubmitButton.disabled = true;
-  constants.popupAddPhotoSubmitButton.classList.add(
-    "popup__submit-button_inactive"
-  );
 }
 
 function openPopupImage(cardName, cardImage) {
@@ -93,10 +82,6 @@ function setEventListeners(Card) {
   constants.editButton.addEventListener("click", () => {
     openEditProfilePopup();
   });
-  constants.popupFormEditProfile.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    handleProfileFormSubmit();
-  });
 
   constants.popupEditProfileCloseButton.addEventListener("click", () => {
     closePopup(constants.popupEditProfile);
@@ -105,11 +90,6 @@ function setEventListeners(Card) {
   //add button event listeners
   constants.addButton.addEventListener("click", () => {
     openPopup(constants.popupAddPhoto);
-  });
-
-  constants.popupFormAddPhoto.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    handleCardFormSubmit(Card);
   });
 
   constants.popupAddPhotoCloseButton.addEventListener("click", () => {
@@ -125,14 +105,12 @@ function setEventListeners(Card) {
   });
 }
 
-function initFormValidating(FormValidator) {
-  const formList = Array.from(document.querySelectorAll(".popup__form"));
-  formList.forEach((formElement) => {
-    new FormValidator(
-      constants.formValidatorData,
-      formElement
-    ).enableValidation();
-  });
+function initFormValidating(formElement, formSubmitFunction) {
+  new FormValidator(
+    constants.formValidatorData,
+    formElement,
+    formSubmitFunction
+  ).enableValidation();
 }
 
 function initialRenderCard(cards, CardClass) {
@@ -145,4 +123,5 @@ function initialRenderCard(cards, CardClass) {
 
 initialRenderCard(cards, Card);
 setEventListeners(Card);
-initFormValidating(FormValidator);
+initFormValidating(constants.popupFormEditProfile, handleProfileFormSubmit);
+initFormValidating(constants.popupFormAddPhoto, handleCardFormSubmit);
