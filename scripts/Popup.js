@@ -16,18 +16,18 @@ export default class Popup {
 
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
-      close();
+      this.close();//need fix
     }
   }
 
   setEventListeners() {
-    this._closeIcon.addEventListener("click", close);
+    this._closeIcon.addEventListener("click", this.close);
     this._popup.addEventListener("click", this._closeOverlay);
   }
   
   _closeOverlay(evt) {
     if (evt.target === evt.currentTarget) {
-      close();
+      this.close();
     }
   }
 }

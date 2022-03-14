@@ -1,10 +1,10 @@
 //createCard template -> add content to it -> add event listeners -> display it on the screen ->
 class Card {
-  constructor(image, name, elementSelector, openPopupImage) {
+  constructor(image, name, elementSelector, handleCardClick) {
     this._image = image;
     this._name = name;
     this._elementSelector = elementSelector;
-    this._openPopupImage = openPopupImage;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate() {
     this._card = document
@@ -25,23 +25,30 @@ class Card {
     this._imageContainer.alt = this._name;
     this._imageContainer.src = this._image;
   }
+
   _setEventListeners() {
     this._garbageButton.addEventListener("click", () => {
       this._removeCard();
     });
+
     this._likeButton.addEventListener("click", () => {
       this._toggleCardLikeButton();
     });
+
     this._imageContainer.addEventListener("click", () => {
-      this._openPopupImage(this._name, this._image);
+      this._handleCardClick.open();
+      this._handleCardClick.setEventListeners();
     });
   }
+
   _removeCard() {
     this._card.remove();
   }
+
   _toggleCardLikeButton() {
     this._likeButton.classList.toggle("element__like-button_active");
   }
+
   generateCard() {
     this._getTemplate();
     this._defineCardVariables();

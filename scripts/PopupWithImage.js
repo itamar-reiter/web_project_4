@@ -17,15 +17,9 @@ export default class PopupWithImage extends Popup {
   }
 
   _addPopupContent() {
+    console.log("popupWithImae is active");
     this._placeNameContainer.textContent = this._placeName;
-    this._backgroundContainer = this._background;
-  }
-
-  close(){
-    super.close();
-  };
-
-  setEventListeners(){
-    super.setEventListeners();
+    console.log("addpopupContent");
+    this._backgroundContainer.style.backgroundImage = this._background;
   }
 }

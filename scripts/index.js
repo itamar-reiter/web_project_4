@@ -2,6 +2,7 @@ import cards from "./cards.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import * as constants from "./utils/constants.js";
+import PopupWithImage from "./PopupWithImage.js";
 //internal functions (for internal use)//
 function openPopup(popup) {
   popup.classList.add("popup_active");
@@ -44,20 +45,20 @@ function handleProfileFormSubmit() {
 
 function handleCardFormSubmit() {
   constants.placesContainer.prepend(
-    createCard(Card, constants.imageLinkInput.value, constants.titleInput.value)
+    createCard(constants.imageLinkInput.value, constants.titleInput.value)
   );
   closePopup(constants.popupAddPhoto);
   constants.popupFormAddPhoto.reset();
 }
 
-function createCard(Card, cardImage, cardName) {
+function createCard(cardImage, cardName) {
   const newCard = new Card(
     cardImage,
     cardName,
     "#cardTemplate",
-    openPopupImage
-  ).generateCard();
-  return newCard;
+    new PopupWithImage(".popup_type_image", cardName, cardImage)
+  );
+  return newCard.generateCard();
 }
 
 function openPopupImage(cardName, cardImage) {
@@ -76,7 +77,7 @@ function addContentPopupImage(cardName, cardImage) {
 
 //exported functions//
 
-function setEventListeners(Card) {
+function setEventListeners() {
   //edit button event listeners
   addInputsFormEditProfile();
   constants.editButton.addEventListener("click", () => {
@@ -113,15 +114,15 @@ function initFormValidating(formElement, formSubmitFunction) {
   ).enableValidation();
 }
 
-function initialRenderCard(cards, CardClass) {
+function initialRenderCard() {
   cards.forEach((card) => {
     constants.placesContainer.append(
-      createCard(CardClass, card.link, card.name)
+      createCard(card.link, card.name)
     );
   });
 }
 
-initialRenderCard(cards, Card);
-setEventListeners(Card);
+initialRenderCard();
+setEventListeners();
 initFormValidating(constants.popupFormEditProfile, handleProfileFormSubmit);
 initFormValidating(constants.popupFormAddPhoto, handleCardFormSubmit);
