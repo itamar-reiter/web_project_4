@@ -5,7 +5,7 @@ import * as constants from "./utils/constants.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 //internal functions (for internal use)//
-/* function openPopup(popup) {
+function openPopup(popup) {
   popup.classList.add("popup_active");
   document.addEventListener("keydown", closeWithEsc);
 }
@@ -13,32 +13,20 @@ import PopupWithForm from "./PopupWithForm.js";
 function closePopup(popup) {
   document.removeEventListener("keydown", closeWithEsc);
   popup.classList.remove("popup_active");
-} */
+}
 
-/* function closeWithEsc(evt) {
+function closeWithEsc(evt) {
   if (evt.key === "Escape") {
     const popup = document.querySelector(".popup_active");
     closePopup(popup);
   }
-} */
+}
 
-/* function closeOverlay(evt) {
+function closeOverlay(evt) {
   if (evt.target === evt.currentTarget) {
     closePopup(evt.target);
   }
-} */
-
-//create instances for both forms
-
-const popupProfileForm = new PopupWithForm(
-  ".popup_type_edit-profile",
-  (evt) => {
-    //destructuring
-    constants.profileName.textContent = PopupWithForm._inputData.name;
-    constants.profileAboutMe.textContent = PopupWithForm._inputData.aboutMe;
-    this.close();
-  }
-);
+}
 
 function openEditProfilePopup() {
   addInputsFormEditProfile();
@@ -74,19 +62,19 @@ function createCard(cardImage, cardName) {
   return newCard.generateCard();
 }
 
-/* function openPopupImage(cardName, cardImage) {
+function openPopupImage(cardName, cardImage) {
   openPopup(constants.popupImage);
   addContentPopupImage(cardName, cardImage);
-} */
+}
 
-/* function addContentPopupImage(cardName, cardImage) {
+function addContentPopupImage(cardName, cardImage) {
   constants.popupBackground.style.backgroundImage =
     `
       url(` +
     cardImage +
     `)`;
   constants.popupPlaceName.textContent = cardName;
-} */
+}
 
 //exported functions//
 
@@ -94,9 +82,7 @@ function setEventListeners() {
   //edit button event listeners
   addInputsFormEditProfile();
   constants.editButton.addEventListener("click", () => {
-    //openEditProfilePopup();
-    popupProfileForm.open();
-    popupProfileForm.setEventListeners();
+    openEditProfilePopup();
   });
 
   constants.popupEditProfileCloseButton.addEventListener("click", () => {
@@ -131,7 +117,9 @@ function initFormValidating(formElement, formSubmitFunction) {
 
 function initialRenderCard() {
   cards.forEach((card) => {
-    constants.placesContainer.append(createCard(card.link, card.name));
+    constants.placesContainer.append(
+      createCard(card.link, card.name)
+    );
   });
 }
 
