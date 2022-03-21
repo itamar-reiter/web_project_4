@@ -33,11 +33,13 @@ function closePopup(popup) {
 
 const popupProfileForm = new PopupWithForm(
   ".popup_type_edit-profile",
-  (evt) => {
+  () => {
     //destructuring
-    constants.profileName.textContent = PopupWithForm._inputData.name;
-    constants.profileAboutMe.textContent = PopupWithForm._inputData.aboutMe;
-    this.close();
+    popupProfileForm._getInputValue();
+    constants.profileName.textContent = popupProfileForm._inputData.name;
+    constants.profileAboutMe.textContent = popupProfileForm._inputData.aboutMe;
+    popupProfileForm.close();
+    popupProfileForm._popup.reset();
   }
 );
 
