@@ -8,8 +8,7 @@ import PopupWithForm from "./PopupWithForm.js";
 import UserInfo from "./UserInfo.js";
 import Section from "./Section.js";
 
-//create instances for both forms
-
+//instance for profileForm
 const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
   const newUserInfo = new UserInfo(
     popupProfileForm._inputData.name,
@@ -19,6 +18,7 @@ const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
   popupProfileForm.close();
 });
 
+//instance for cardForm
 const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
   const cardSection = new Section(
     {
@@ -41,6 +41,65 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
   popupCardForm.close();
 });
 
+//instance for getUserInfo dlivered to profileForm inputs
+function addingUserInfo() {
+  const formUserInfo = new UserInfo(
+    constants.profileName.textContent,
+    constants.profileAboutMe.textContent
+  );
+  formUserInfo.getUserInfo().forEach((element, i) => {
+    popupProfileForm.formInputs[i].value = element;
+  });
+}
+
+//instance for initialize form validating
+function initFormValidating(formElement, formSubmitFunction) {
+  new FormValidator(
+    constants.formValidatorData,
+    formElement,
+    formSubmitFunction
+  ).enableValidation();
+}
+
+//instance for defining initial cards
+const initialCards = new Section(
+  {
+    items: cards,
+    renderer: (item) => {
+      const renderedCard = new Card(
+        item.link,
+        item.name,
+        "#cardTemplate",
+        new PopupWithImage(".popup_type_image", item.name, item.link)
+      ).generateCard();
+      initialCards.setItem(renderedCard);
+    },
+  },
+  ".grid-elements"
+);
+
+//setting eventListeners for buttons on the page
+function setEventListeners() {
+  //edit button event listeners
+  constants.editButton.addEventListener("click", () => {
+    addingUserInfo();
+    popupProfileForm.open();
+    popupProfileForm.setEventListeners();
+  });
+
+  //add button event listeners
+  constants.addButton.addEventListener("click", () => {
+    popupCardForm.open();
+    popupCardForm.setEventListeners();
+  });
+}
+
+//set initialCards
+initialCards.renderItems();
+setEventListeners();
+initFormValidating(constants.popupFormEditProfile, handleProfileFormSubmit);
+initFormValidating(constants.popupFormAddPhoto, handleCardFormSubmit);
+
 /* function handleCardFormSubmit() {
     constants.placesContainer.prepend(
       createCard(constants.imageLinkInput.value, constants.titleInput.value)
@@ -58,55 +117,3 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
   );
   return newCard.generateCard();
 } */
-
-//exported functions//
-
-function setEventListeners() {
-  //edit button event listeners
-  constants.editButton.addEventListener("click", () => {
-    const FormUserInfo = new UserInfo(
-      constants.profileName.textContent,
-      constants.profileAboutMe.textContent
-    );
-    FormUserInfo.getUserInfo().forEach((element, i) => {
-      popupProfileForm.formInputs[i].value = element;
-    });
-    popupProfileForm.open();
-    popupProfileForm.setEventListeners();
-  });
-
-  //add button event listeners
-  constants.addButton.addEventListener("click", () => {
-    popupCardForm.open();
-    popupCardForm.setEventListeners();
-  });
-}
-
-function initFormValidating(formElement, formSubmitFunction) {
-  new FormValidator(
-    constants.formValidatorData,
-    formElement,
-    formSubmitFunction
-  ).enableValidation();
-}
-
-const initialCards = new Section(
-  {
-    items: cards,
-    renderer: (item) => {
-      const renderedCard = new Card(
-        item.link,
-        item.name,
-        "#cardTemplate",
-        new PopupWithImage(".popup_type_image", item.name, item.link)
-      ).generateCard();
-      initialCards.setItem(renderedCard);
-    },
-  },
-  ".grid-elements"
-);
-//instance of Section for initialCards
-initialCards.renderItems();
-setEventListeners();
-initFormValidating(constants.popupFormEditProfile, handleProfileFormSubmit);
-initFormValidating(constants.popupFormAddPhoto, handleCardFormSubmit);
