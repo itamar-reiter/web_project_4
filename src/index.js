@@ -11,15 +11,15 @@ import Section from "./Section.js";
 //create instances for both forms
 
 const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
-  //popupProfileForm._getInputValue();
-  constants.profileName.textContent = popupProfileForm._inputData.name;
-  constants.profileAboutMe.textContent = popupProfileForm._inputData.aboutMe;
+  const newUserInfo = new UserInfo(
+    popupProfileForm._inputData.name,
+    popupProfileForm._inputData.aboutMe
+  );
+  newUserInfo.setUserInfo();
   popupProfileForm.close();
 });
 
 const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
-  //popupCardForm._getInputValue();
-
   const cardSection = new Section(
     {
       items: Array.from(popupCardForm._inputData),
@@ -49,15 +49,6 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
     constants.popupFormAddPhoto.reset();
   } */
 
-function openEditProfilePopup() {
-  addInputsFormEditProfile();
-}
-
-function addInputsFormEditProfile() {
-  constants.nameInput.value = constants.profileName.textContent;
-  constants.aboutMeInput.value = constants.profileAboutMe.textContent;
-}
-
 /* function createCard(cardImage, cardName) {
   const newCard = new Card(
     cardImage,
@@ -72,9 +63,14 @@ function addInputsFormEditProfile() {
 
 function setEventListeners() {
   //edit button event listeners
-  addInputsFormEditProfile();
   constants.editButton.addEventListener("click", () => {
-    openEditProfilePopup();
+    const FormUserInfo = new UserInfo(
+      constants.profileName.textContent,
+      constants.profileAboutMe.textContent
+    );
+    FormUserInfo.getUserInfo().forEach((element, i) => {
+      popupProfileForm.formInputs[i].value = element;
+    });
     popupProfileForm.open();
     popupProfileForm.setEventListeners();
   });
