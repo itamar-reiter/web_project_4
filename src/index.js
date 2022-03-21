@@ -11,11 +11,11 @@ import Section from "./Section.js";
 
 const popupProfileForm = new PopupWithForm(
   ".popup_type_edit-profile",
-  (_getInputValue) => {
-    //destructuring
-    //_getInputValue();
-    constants.profileName.textContent = PopupWithForm._getInputValue.name;
-    constants.profileAboutMe.textContent = PopupWithForm._getInputValue.aboutMe;
+  () => {
+    popupProfileForm._getInputValue();
+    constants.profileName.textContent = popupProfileForm._inputData.name;
+    constants.profileAboutMe.textContent = popupProfileForm._inputData.aboutMe;
+    popupProfileForm.close();
   }
 );
 
