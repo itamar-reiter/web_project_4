@@ -9,32 +9,36 @@ import Section from "./Section.js";
 
 //create instances for both forms
 
-const popupProfileForm = new PopupWithForm(
-  ".popup_type_edit-profile",
-  () => {
-    popupProfileForm._getInputValue();
-    constants.profileName.textContent = popupProfileForm._inputData.name;
-    constants.profileAboutMe.textContent = popupProfileForm._inputData.aboutMe;
-    popupProfileForm.close();
-  }
-);
+const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
+  //popupProfileForm._getInputValue();
+  constants.profileName.textContent = popupProfileForm._inputData.name;
+  constants.profileAboutMe.textContent = popupProfileForm._inputData.aboutMe;
+  popupProfileForm.close();
+});
 
-const popupCardForm = new PopupWithForm(
-  ".popup_type_add-photo",
-  (_getInputValue) => {
-    const newCard = new Card(
-      _getInputValue.imageLink,
-      _getInputValue.title,
-      "#cardTemplate",
-      new PopupWithImage(
-        ".popup_type_image",
-        _getInputValue.title,
-        _getInputValue.imageLink
-      )
-    );
-    newCard.generateCard();
-  }
-);
+const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
+  //popupCardForm._getInputValue();
+
+  const cardSection = new Section(
+    {
+      items: Array.from(popupCardForm._inputData),
+      renderer: (item) => {
+        console.log("renderer of popupCardForm Section");
+        const newCard = new Card(
+          item.imageLink,
+          item.title,
+          "#cardTemplate",
+          new PopupWithImage(".popup_type_image", item.title, item.imageLink)
+        );
+        newCard.generateCard();
+        cardSection.setItem(newCard);
+      },
+    },
+    ".grid-elements"
+  );
+  cardSection.renderItems();
+  popupCardForm.close();
+});
 
 /* function handleCardFormSubmit() {
     constants.placesContainer.prepend(
