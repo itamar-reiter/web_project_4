@@ -5,6 +5,7 @@ import FormValidator from "./FormValidator.js";
 import * as constants from "./utils/constants.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 import Section from "./Section.js";
 
 //create instances for both forms
