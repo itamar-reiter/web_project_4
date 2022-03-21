@@ -53,12 +53,6 @@ function addInputsFormEditProfile() {
   constants.aboutMeInput.value = constants.profileAboutMe.textContent;
 }
 
-/* function handleProfileFormSubmit() {
-  constants.profileName.textContent = constants.nameInput.value;
-  constants.profileAboutMe.textContent = constants.aboutMeInput.value;
-  closePopup(constants.popupEditProfile);
-} */
-
 /* function createCard(cardImage, cardName) {
   const newCard = new Card(
     cardImage,
@@ -67,20 +61,6 @@ function addInputsFormEditProfile() {
     new PopupWithImage(".popup_type_image", cardName, cardImage)
   );
   return newCard.generateCard();
-} */
-
-/* function openPopupImage(cardName, cardImage) {
-  openPopup(constants.popupImage);
-  addContentPopupImage(cardName, cardImage);
-} */
-
-/* function addContentPopupImage(cardName, cardImage) {
-  constants.popupBackground.style.backgroundImage =
-    `
-      url(` +
-    cardImage +
-    `)`;
-  constants.popupPlaceName.textContent = cardName;
 } */
 
 //exported functions//
