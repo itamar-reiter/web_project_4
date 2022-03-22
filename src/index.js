@@ -28,7 +28,7 @@ const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
 const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
   const cardSection = new Section(
     {
-      items: Array.from(popupCardForm._inputData),
+      items: [popupCardForm._inputData],
       renderer: (item) => {
         console.log("renderer of popupCardForm Section");
         const newCard = new Card(
@@ -37,8 +37,7 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
           "#cardTemplate",
           new PopupWithImage(".popup_type_image", item.title, item.imageLink)
         );
-        newCard.generateCard();
-        cardSection.setItem(newCard);
+        cardSection.setItem(newCard.generateCard());
       },
     },
     ".grid-elements"
@@ -80,8 +79,8 @@ const initialCards = new Section(
         item.name,
         "#cardTemplate",
         new PopupWithImage(".popup_type_image", item.name, item.link)
-      ).generateCard();
-      initialCards.setItem(renderedCard);
+      );
+      initialCards.setItem(renderedCard.generateCard());
     },
   },
   ".grid-elements"
@@ -108,21 +107,3 @@ initialCards.renderItems();
 setEventListeners();
 initFormValidating(popupProfileForm._popup);
 initFormValidating(popupCardForm._popup);
-
-/* function handleCardFormSubmit() {
-    constants.placesContainer.prepend(
-      createCard(constants.imageLinkInput.value, constants.titleInput.value)
-    );
-    closePopup(constants.popupAddPhoto);
-    constants.popupFormAddPhoto.reset();
-  } */
-
-/* function createCard(cardImage, cardName) {
-  const newCard = new Card(
-    cardImage,
-    cardName,
-    "#cardTemplate",
-    new PopupWithImage(".popup_type_image", cardName, cardImage)
-  );
-  return newCard.generateCard();
-} */
