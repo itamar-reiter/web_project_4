@@ -1,12 +1,12 @@
 import "./pages/index.css";
-import cards from "./cards.js";
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+import cards from "./utils/cards.js";
+import Card from "./classess/Card.js";
+import FormValidator from "./classess/FormValidator.js";
 import * as constants from "./utils/constants.js";
-import PopupWithImage from "./PopupWithImage.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo.js";
-import Section from "./Section.js";
+import PopupWithImage from "./classess/PopupWithImage.js";
+import PopupWithForm from "./classess/PopupWithForm.js";
+import UserInfo from "./classess/UserInfo.js";
+import Section from "./classess/Section.js";
 
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {

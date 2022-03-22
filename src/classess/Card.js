@@ -1,5 +1,5 @@
 //createCard template -> add content to it -> add event listeners -> display it on the screen ->
-class Card {
+export default class Card {
   constructor(image, name, elementSelector, handleCardClick) {
     this._image = image;
     this._name = name;
@@ -58,4 +58,3 @@ class Card {
     return this._card;
   }
 }
-export default Card;
