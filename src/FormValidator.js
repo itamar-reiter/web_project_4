@@ -1,5 +1,5 @@
 class FormValidator {
-  constructor(data, formElement, handleFormSubmit) {
+  constructor(data, formElement) {
     this._formSelector = data.formSelector;
     this._inputSelector = data.inputSelector;
     this._submitButtonSelector = data.submitButtonSelector;
@@ -7,7 +7,7 @@ class FormValidator {
     this._inputErrorClass = data.inputErrorClass;
     this._errorClass = data.errorClass;
     this._formElement = formElement;
-    this._handleFormSubmit = handleFormSubmit;
+    //this._handleFormSubmit = handleFormSubmit;
   }
 
   /* removing error message and input errorAlert */
@@ -75,7 +75,7 @@ class FormValidator {
   enableValidation() {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit();
+      //this._handleFormSubmit();
       this._toggleSubmitButton();
     });
     this._adjustEventListeners();

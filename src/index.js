@@ -10,13 +10,17 @@ import Section from "./Section.js";
 
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
-  console.log(`before set user info ${popupProfileForm._inputData.name} - ${popupProfileForm._inputData.aboutMe}`);
+  console.log(
+    `before set user info ${popupProfileForm._inputData.name} - ${popupProfileForm._inputData.aboutMe}`
+  );
   const newUserInfo = new UserInfo(
     popupProfileForm._inputData.name,
     popupProfileForm._inputData.aboutMe
   );
   newUserInfo.setUserInfo();
-  console.log(`after set user info ${popupProfileForm._inputData.name} - ${popupProfileForm._inputData.aboutMe}`);
+  console.log(
+    `after set user info ${popupProfileForm._inputData.name} - ${popupProfileForm._inputData.aboutMe}`
+  );
   popupProfileForm.close();
 });
 
@@ -50,18 +54,19 @@ function addUserInfo() {
     constants.profileAboutMe.textContent
   );
   formUserInfo.getUserInfo().forEach((element, i) => {
-    console.log(`before value update - ${popupProfileForm.formInputs[i].value}`);
+    console.log(
+      `before value update - ${popupProfileForm.formInputs[i].value}`
+    );
     popupProfileForm.formInputs[i].value = element;
     console.log(`after value update - ${popupProfileForm.formInputs[i].value}`);
   });
 }
 
 //instance for initialize form validating
-function initFormValidating(formElement, formSubmitFunction) {
+function initFormValidating(formElement) {
   new FormValidator(
     constants.formValidatorData,
-    formElement,
-    formSubmitFunction
+    formElement
   ).enableValidation();
 }
 
@@ -101,8 +106,8 @@ function setEventListeners() {
 //set initialCards
 initialCards.renderItems();
 setEventListeners();
-initFormValidating(constants.popupFormEditProfile, handleProfileFormSubmit);
-initFormValidating(constants.popupFormAddPhoto, handleCardFormSubmit);
+initFormValidating(popupProfileForm._popup);
+initFormValidating(popupCardForm._popup);
 
 /* function handleCardFormSubmit() {
     constants.placesContainer.prepend(
