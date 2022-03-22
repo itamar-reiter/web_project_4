@@ -105,5 +105,5 @@ function setEventListeners() {
 //set initialCards
 initialCards.renderItems();
 setEventListeners();
-initFormValidating(popupProfileForm._popup);
-initFormValidating(popupCardForm._popup);
+initFormValidating(popupProfileForm.popup);
+initFormValidating(popupCardForm.popup);
