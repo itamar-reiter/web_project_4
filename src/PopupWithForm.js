@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
       this._popup.querySelectorAll(".popup__input")
       );
       this._inputData = {};
+      this._form = this._popup.querySelector(".popup__form");
   }
   _getInputValue() {
     console.log("_getInputValue");
@@ -30,6 +31,6 @@ export default class PopupWithForm extends Popup {
 
   close(){
     super.close();
-    this._popup.reset();
+    this._form.reset();
   }
 }
