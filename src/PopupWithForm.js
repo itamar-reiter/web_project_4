@@ -11,9 +11,9 @@ export default class PopupWithForm extends Popup {
       this._form = this._popup.querySelector(".popup__form");
   }
   _getInputValue() {
-    console.log("_getInputValue");
     this.formInputs.forEach((inputElement) => {
       this._inputData[inputElement.id] = inputElement.value;
+      console.log(`_getInputValue - inputElement.value: ${inputElement.value} `);
     });
   }
   setEventListeners(){

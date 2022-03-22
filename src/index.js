@@ -10,11 +10,13 @@ import Section from "./Section.js";
 
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
+  console.log(`before set user info ${popupProfileForm._inputData.name} - ${popupProfileForm._inputData.aboutMe}`);
   const newUserInfo = new UserInfo(
     popupProfileForm._inputData.name,
     popupProfileForm._inputData.aboutMe
   );
   newUserInfo.setUserInfo();
+  console.log(`after set user info ${popupProfileForm._inputData.name} - ${popupProfileForm._inputData.aboutMe}`);
   popupProfileForm.close();
 });
 
@@ -42,13 +44,15 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
 });
 
 //instance for getUserInfo dlivered to profileForm inputs
-function addingUserInfo() {
+function addUserInfo() {
   const formUserInfo = new UserInfo(
     constants.profileName.textContent,
     constants.profileAboutMe.textContent
   );
   formUserInfo.getUserInfo().forEach((element, i) => {
+    console.log(`before value update - ${popupProfileForm.formInputs[i].value}`);
     popupProfileForm.formInputs[i].value = element;
+    console.log(`after value update - ${popupProfileForm.formInputs[i].value}`);
   });
 }
 
@@ -82,7 +86,7 @@ const initialCards = new Section(
 function setEventListeners() {
   //edit button event listeners
   constants.editButton.addEventListener("click", () => {
-    addingUserInfo();
+    addUserInfo();
     popupProfileForm.open();
     popupProfileForm.setEventListeners();
   });
