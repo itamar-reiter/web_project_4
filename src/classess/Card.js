@@ -4,7 +4,9 @@ export default class Card {
     this._image = image;
     this._name = name;
     this._elementSelector = elementSelector;
-    this._handleCardClick = handleCardClick;
+    this._handleCardClick = () => {
+      handleCardClick(this._name, this._image);
+    };
   }
   _getTemplate() {
     this._card = document
@@ -31,19 +33,17 @@ export default class Card {
 
     this._likeButton.addEventListener("click", this._toggleCardLikeButton);
 
-    this._imageContainer.addEventListener("click", () => {
-      this._handleCardClick(this._name, this._image);
-    });
+    this._imageContainer.addEventListener("click", this._handleCardClick);
   }
 
   _removeCard = () => {
     this._card.remove();
     this._card = null;
-  }
+  };
 
   _toggleCardLikeButton = () => {
     this._likeButton.classList.toggle("element__like-button_active");
-  }
+  };
 
   generateCard() {
     this._getTemplate();
