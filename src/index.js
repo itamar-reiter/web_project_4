@@ -11,8 +11,8 @@ import Section from "./classess/Section.js";
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
   const newUserInfo = new UserInfo(
-    popupProfileForm._inputData.name,
-    popupProfileForm._inputData.aboutMe
+    popupProfileForm._getInputValue().name,
+    popupProfileForm._getInputValue().aboutMe
   );
   newUserInfo.setUserInfo();
 
@@ -23,7 +23,7 @@ const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
 const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
   const cardSection = new Section(
     {
-      items: [popupCardForm._inputData],
+      items: [popupCardForm._getInputValue()],
       renderer: (item) => {
         const newCard = new Card(
           item.imageLink,
