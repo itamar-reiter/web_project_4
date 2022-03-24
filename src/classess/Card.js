@@ -27,25 +27,21 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._garbageButton.addEventListener("click", () => {
-      this._removeCard();
-    });
+    this._garbageButton.addEventListener("click", this._removeCard);
 
-    this._likeButton.addEventListener("click", () => {
-      this._toggleCardLikeButton();
-    });
+    this._likeButton.addEventListener("click", this._toggleCardLikeButton);
 
     this._imageContainer.addEventListener("click", () => {
-      this._handleCardClick.open();
-      this._handleCardClick.setEventListeners();
+      this._handleCardClick(this._name, this._image);
     });
   }
 
-  _removeCard() {
+  _removeCard = () => {
     this._card.remove();
+    this._card = null;
   }
 
-  _toggleCardLikeButton() {
+  _toggleCardLikeButton = () => {
     this._likeButton.classList.toggle("element__like-button_active");
   }
 

@@ -35,7 +35,7 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
           item.imageLink,
           item.title,
           "#cardTemplate",
-          new PopupWithImage(".popup_type_image", item.title, item.imageLink)
+          createPopupImage,
         );
         cardSection.setItem(newCard.generateCard());
       },
@@ -61,6 +61,12 @@ function addUserInfo() {
   });
 }
 
+function createPopupImage(title, imageLink) {
+  const newPopupImage = new PopupWithImage(".popup_type_image", title, imageLink);
+  newPopupImage.open();
+  newPopupImage.setEventListeners();
+}
+
 //instance for initialize form validating
 function initFormValidating(formElement) {
   new FormValidator(
@@ -78,7 +84,7 @@ const initialCards = new Section(
         item.link,
         item.name,
         "#cardTemplate",
-        new PopupWithImage(".popup_type_image", item.name, item.link)
+        createPopupImage,
       );
       initialCards.setItem(renderedCard.generateCard());
     },
