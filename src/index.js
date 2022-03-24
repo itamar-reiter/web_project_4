@@ -10,17 +10,12 @@ import Section from "./classess/Section.js";
 
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
-  console.log(
-    `before set user info ${popupProfileForm._inputData.name} - ${popupProfileForm._inputData.aboutMe}`
-  );
   const newUserInfo = new UserInfo(
     popupProfileForm._inputData.name,
     popupProfileForm._inputData.aboutMe
   );
   newUserInfo.setUserInfo();
-  console.log(
-    `after set user info ${popupProfileForm._inputData.name} - ${popupProfileForm._inputData.aboutMe}`
-  );
+
   popupProfileForm.close();
 });
 
@@ -30,12 +25,11 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
     {
       items: [popupCardForm._inputData],
       renderer: (item) => {
-        console.log("renderer of popupCardForm Section");
         const newCard = new Card(
           item.imageLink,
           item.title,
           "#cardTemplate",
-          createPopupImage,
+          createPopupImage
         );
         cardSection.setItem(newCard.generateCard());
       },
@@ -53,16 +47,16 @@ function addUserInfo() {
     constants.profileAboutMe.textContent
   );
   formUserInfo.getUserInfo().forEach((element, i) => {
-    console.log(
-      `before value update - ${popupProfileForm.formInputs[i].value}`
-    );
     popupProfileForm.formInputs[i].value = element;
-    console.log(`after value update - ${popupProfileForm.formInputs[i].value}`);
   });
 }
 
 function createPopupImage(title, imageLink) {
-  const newPopupImage = new PopupWithImage(".popup_type_image", title, imageLink);
+  const newPopupImage = new PopupWithImage(
+    ".popup_type_image",
+    title,
+    imageLink
+  );
   newPopupImage.open();
   newPopupImage.setEventListeners();
 }
@@ -84,7 +78,7 @@ const initialCards = new Section(
         item.link,
         item.name,
         "#cardTemplate",
-        createPopupImage,
+        createPopupImage
       );
       initialCards.setItem(renderedCard.generateCard());
     },
