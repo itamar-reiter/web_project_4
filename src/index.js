@@ -12,10 +12,11 @@ import Section from "./classess/Section.js";
 const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
   const newUserInfo = new UserInfo(
     popupProfileForm._getInputValue().name,
-    popupProfileForm._getInputValue().aboutMe
+    popupProfileForm._getInputValue().aboutMe,
+    ".profile__name",
+    ".profile__about-me"
   );
-  newUserInfo.setUserInfo();
-
+  newUserInfo.setUserInfo(newUserInfo._name, newUserInfo._job);
   popupProfileForm.close();
 });
 
@@ -44,9 +45,14 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
 function addUserInfo() {
   const formUserInfo = new UserInfo(
     constants.profileName.textContent,
-    constants.profileAboutMe.textContent
+    constants.profileAboutMe.textContent,
+    ".profile__name",
+    ".profile__about-me"
   );
-  formUserInfo.getUserInfo().forEach((element, i) => {
+  const userData = Object.values(
+    formUserInfo.getUserInfo(formUserInfo._name, formUserInfo._job)
+  );
+  userData.forEach((element, i) => {
     popupProfileForm.formInputs[i].value = element;
   });
 }
