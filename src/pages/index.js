@@ -11,19 +11,19 @@ import Section from "../classess/Section.js";
 //instance for userInfo
 const userInfo = new UserInfo(".profile__name", ".profile__about-me");
 //instance for profileForm
-const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
+const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", (inputValue) => {
   userInfo.setUserInfo(
-    popupProfileForm._getInputValue().name,
-    popupProfileForm._getInputValue().aboutMe
+    inputValue.name,
+    inputValue.aboutMe
   );
   popupProfileForm.close();
 });
 
 //instance for cardForm
-const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
+const popupCardForm = new PopupWithForm(".popup_type_add-photo", (inputValue) => {
   const cardSection = new Section(
     {
-      items: [popupCardForm._getInputValue()],
+      items: [inputValue],
       renderer: (item) => {
         const newCard = new Card(
           item.imageLink,
@@ -48,9 +48,7 @@ function addUserInfo() {
       constants.profileAboutMe.textContent
     )
   );
-  userData.forEach((element, i) => {
-    popupProfileForm.formInputs[i].value = element;
-  });
+  popupProfileForm.setInputValues(userData);
 }
 
 function createPopupImage(title, imageLink) {
