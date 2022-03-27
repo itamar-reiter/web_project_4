@@ -25,6 +25,7 @@ const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", (inputVal
   );
   popupProfileForm.close();
 });
+popupProfileForm.setEventListeners();
 
 //instance for cardForm
 const popupCardForm = new PopupWithForm(".popup_type_add-photo", (inputValue) => {
@@ -46,6 +47,7 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", (inputValue) =>
   cardSection.renderItems();
   popupCardForm.close();
 });
+popupCardForm.setEventListeners();
 
 //instance for getUserInfo dlivered to profileForm inputs
 function addUserInfo() {
@@ -58,11 +60,11 @@ function addUserInfo() {
   popupProfileForm.setInputValues(userData);
 }
 
-function createPopupImage(title, imageLink) {
+function createPopupImage(name, link) {
   const newPopupImage = new PopupWithImage(
     ".popup_type_image",
-    title,
-    imageLink
+    name,
+    link
   );
   newPopupImage.open();
   newPopupImage.setEventListeners();
@@ -99,13 +101,12 @@ function setEventListeners() {
   constants.editButton.addEventListener("click", () => {
     addUserInfo();
     popupProfileForm.open();
-    popupProfileForm.setEventListeners();
   });
 
   //add button event listeners
   constants.addButton.addEventListener("click", () => {
     popupCardForm.open();
-    popupCardForm.setEventListeners();
+    
   });
 }
 
