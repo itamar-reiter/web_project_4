@@ -8,6 +8,7 @@ export default class Card {
       handleCardClick(this._name, this._image);
     };
   }
+  
   _getTemplate() {
     this._card = document
       .querySelector(this._elementSelector)

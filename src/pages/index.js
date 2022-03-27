@@ -1,22 +1,21 @@
-import "./pages/index.css";
-import cards from "./utils/cards.js";
-import Card from "./classess/Card.js";
-import FormValidator from "./classess/FormValidator.js";
-import * as constants from "./utils/constants.js";
-import PopupWithImage from "./classess/PopupWithImage.js";
-import PopupWithForm from "./classess/PopupWithForm.js";
-import UserInfo from "./classess/UserInfo.js";
-import Section from "./classess/Section.js";
+import "./index.css";
+import cards from "../utils/cards.js";
+import Card from "../classess/Card.js";
+import FormValidator from "../classess/FormValidator.js";
+import * as constants from "../utils/constants.js";
+import PopupWithImage from "../classess/PopupWithImage.js";
+import PopupWithForm from "../classess/PopupWithForm.js";
+import UserInfo from "../classess/UserInfo.js";
+import Section from "../classess/Section.js";
 
+//instance for userInfo
+const userInfo = new UserInfo(".profile__name", ".profile__about-me");
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", () => {
-  const newUserInfo = new UserInfo(
+  userInfo.setUserInfo(
     popupProfileForm._getInputValue().name,
-    popupProfileForm._getInputValue().aboutMe,
-    ".profile__name",
-    ".profile__about-me"
+    popupProfileForm._getInputValue().aboutMe
   );
-  newUserInfo.setUserInfo(newUserInfo._name, newUserInfo._job);
   popupProfileForm.close();
 });
 
@@ -43,14 +42,11 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", () => {
 
 //instance for getUserInfo dlivered to profileForm inputs
 function addUserInfo() {
-  const formUserInfo = new UserInfo(
-    constants.profileName.textContent,
-    constants.profileAboutMe.textContent,
-    ".profile__name",
-    ".profile__about-me"
-  );
   const userData = Object.values(
-    formUserInfo.getUserInfo(formUserInfo._name, formUserInfo._job)
+    userInfo.getUserInfo(
+      constants.profileName.textContent,
+      constants.profileAboutMe.textContent
+    )
   );
   userData.forEach((element, i) => {
     popupProfileForm.formInputs[i].value = element;
