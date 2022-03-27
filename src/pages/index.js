@@ -10,6 +10,13 @@ import Section from "../classess/Section.js";
 
 //instance for userInfo
 const userInfo = new UserInfo(".profile__name", ".profile__about-me");
+
+/* //instance for Card
+const card = new Card */
+
+//instance for Section
+//const cardSection = new Section({items: },".grid-elements");
+
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", (inputValue) => {
   userInfo.setUserInfo(
@@ -26,8 +33,8 @@ const popupCardForm = new PopupWithForm(".popup_type_add-photo", (inputValue) =>
       items: [inputValue],
       renderer: (item) => {
         const newCard = new Card(
-          item.imageLink,
-          item.title,
+          item.link,
+          item.name,
           "#cardTemplate",
           createPopupImage
         );
