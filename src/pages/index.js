@@ -63,10 +63,8 @@ function addUserInfo() {
 function createPopupImage(name, link) {
   const newPopupImage = new PopupWithImage(
     ".popup_type_image",
-    name,
-    link
   );
-  newPopupImage.open();
+  newPopupImage.open(name, link);
   newPopupImage.setEventListeners();
 }
 
