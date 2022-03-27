@@ -6,9 +6,9 @@ export default class PopupWithImage extends Popup {
     this._placeNameContainer = this.popup.querySelector(".popup__place-name");
     this._backgroundContainer = this.popup.querySelector(".popup__background");
   }
-  open(name, link) {
+  open(title, link) {
     super.open();
-    this._placeNameContainer.textContent = name;
+    this._placeNameContainer.textContent = title;
     this._backgroundContainer.style.backgroundImage =
       `
     url(` +

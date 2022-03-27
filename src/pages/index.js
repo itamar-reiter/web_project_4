@@ -35,7 +35,7 @@ const popupImage = new PopupWithImage(".popup_type_image");
 const cardSection = new Section((item) => {
   const renderedCard = new Card(
     item.link,
-    item.name,
+    item.title,
     "#cardTemplate",
     createPopupImage
   );
@@ -56,8 +56,8 @@ function addUserInfo() {
 //instance for userInfo
 const userInfo = new UserInfo(".profile__name", ".profile__about-me");
 
-function createPopupImage(name, link) {
-  popupImage.open(name, link);
+function createPopupImage(title, link) {
+  popupImage.open(title, link);
   popupImage.setEventListeners();
 }
 
