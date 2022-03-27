@@ -8,46 +8,39 @@ import PopupWithForm from "../classess/PopupWithForm.js";
 import UserInfo from "../classess/UserInfo.js";
 import Section from "../classess/Section.js";
 
-//instance for userInfo
-const userInfo = new UserInfo(".profile__name", ".profile__about-me");
-
-/* //instance for Card
-const card = new Card */
-
-//instance for Section
-//const cardSection = new Section({items: },".grid-elements");
-
 //instance for profileForm
-const popupProfileForm = new PopupWithForm(".popup_type_edit-profile", (inputValue) => {
-  userInfo.setUserInfo(
-    inputValue.name,
-    inputValue.aboutMe
-  );
-  popupProfileForm.close();
-});
+const popupProfileForm = new PopupWithForm(
+  ".popup_type_edit-profile",
+  (inputValue) => {
+    userInfo.setUserInfo(inputValue.name, inputValue.aboutMe);
+    popupProfileForm.close();
+  }
+);
 popupProfileForm.setEventListeners();
 
 //instance for cardForm
-const popupCardForm = new PopupWithForm(".popup_type_add-photo", (inputValue) => {
-  const cardSection = new Section(
-    {
-      items: [inputValue],
-      renderer: (item) => {
-        const newCard = new Card(
-          item.link,
-          item.name,
-          "#cardTemplate",
-          createPopupImage
-        );
-        cardSection.setItem(newCard.generateCard());
-      },
-    },
-    ".grid-elements"
-  );
-  cardSection.renderItems();
-  popupCardForm.close();
-});
+const popupCardForm = new PopupWithForm(
+  ".popup_type_add-photo",
+  (inputValue) => {
+    cardSection.renderItems([inputValue]);
+    popupCardForm.close();
+  }
+);
 popupCardForm.setEventListeners();
+
+//instance for popupImage
+const popupImage = new PopupWithImage(".popup_type_image");
+
+//instance for Section
+const cardSection = new Section((item) => {
+  const renderedCard = new Card(
+    item.link,
+    item.name,
+    "#cardTemplate",
+    createPopupImage
+  );
+  cardSection.setItem(renderedCard.generateCard());
+}, ".grid-elements");
 
 //instance for getUserInfo dlivered to profileForm inputs
 function addUserInfo() {
@@ -60,12 +53,12 @@ function addUserInfo() {
   popupProfileForm.setInputValues(userData);
 }
 
+//instance for userInfo
+const userInfo = new UserInfo(".profile__name", ".profile__about-me");
+
 function createPopupImage(name, link) {
-  const newPopupImage = new PopupWithImage(
-    ".popup_type_image",
-  );
-  newPopupImage.open(name, link);
-  newPopupImage.setEventListeners();
+  popupImage.open(name, link);
+  popupImage.setEventListeners();
 }
 
 //instance for initialize form validating
@@ -75,23 +68,6 @@ function initFormValidating(formElement) {
     formElement
   ).enableValidation();
 }
-
-//instance for defining initial cards
-const initialCards = new Section(
-  {
-    items: cards,
-    renderer: (item) => {
-      const renderedCard = new Card(
-        item.link,
-        item.name,
-        "#cardTemplate",
-        createPopupImage
-      );
-      initialCards.setItem(renderedCard.generateCard());
-    },
-  },
-  ".grid-elements"
-);
 
 //setting eventListeners for buttons on the page
 function setEventListeners() {
@@ -104,12 +80,11 @@ function setEventListeners() {
   //add button event listeners
   constants.addButton.addEventListener("click", () => {
     popupCardForm.open();
-    
   });
 }
 
 //set initialCards
-initialCards.renderItems();
+cardSection.renderItems(cards);
 setEventListeners();
 initFormValidating(popupProfileForm.popup);
 initFormValidating(popupCardForm.popup);
