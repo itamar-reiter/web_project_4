@@ -17,10 +17,6 @@ export default class PopupWithForm extends Popup {
   }
 
   setInputValues(inputData) {
-    /* const formElements = this._form.elements;
-    Object.keys(inputData).forEach((key) => {
-      formElements[`${key}`].value = inputData.key;
-    }); */
     this.formInputs.forEach((input) => {
       input.value = inputData[input.name];
     });
