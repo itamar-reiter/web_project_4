@@ -4,9 +4,11 @@ export default class UserInfo {
     this._jobContainer = document.querySelector(jobContainerSelector);
   }
 
-  getUserInfo = (name, job) => {
-    const userInfo = { name, job };
-    return userInfo;
+  getUserInfo = () => {
+    return {
+      name: this._nameContainer.textContent,
+      job: this._jobContainer.textContent,
+    };
   };
 
   setUserInfo(name, job) {

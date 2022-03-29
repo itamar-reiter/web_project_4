@@ -44,12 +44,8 @@ const cardSection = new Section((item) => {
 
 //instance for getUserInfo dlivered to profileForm inputs
 function addUserInfo() {
-  const userData = Object.values(
-    userInfo.getUserInfo(
-      constants.profileName.textContent,
-      constants.profileAboutMe.textContent
-    )
-  );
+  const userData = userInfo.getUserInfo();
+  //console.log(userData);
   popupProfileForm.setInputValues(userData);
 }
 
