@@ -7,6 +7,12 @@ import PopupWithImage from "../classess/PopupWithImage.js";
 import PopupWithForm from "../classess/PopupWithForm.js";
 import UserInfo from "../classess/UserInfo.js";
 import Section from "../classess/Section.js";
+import Api from "../classess/Api.js";
+
+//instance for api
+const initApi = new Api(constants.apiData);
+const userSettings = initApi.getUserSettings();
+const serverCards = initApi.getInitialCards();
 
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(

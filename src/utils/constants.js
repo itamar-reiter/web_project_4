@@ -1,4 +1,9 @@
 //variables for default displayed content
+export const apiData = {
+  groupId: "group-12",
+  token: "4c5ffc10-7ef8-4216-9730-733ca7b03273",
+  serverAdress: "https://around.nomoreparties.co"
+}
 export const profile = document.querySelector(".profile");
 export const profileName = profile.querySelector(".profile__name");
 export const profileAboutMe = profile.querySelector(".profile__about-me");
