@@ -1,14 +1,15 @@
 //createCard template -> add content to it -> add event listeners -> display it on the screen ->
 export default class Card {
-  constructor(image, name, elementSelector, handleCardClick) {
+  constructor(image, name, elementSelector, handleCardClick, likeArray) {
     this._image = image;
     this._name = name;
     this._elementSelector = elementSelector;
+    this._likeArray = likeArray;
     this._handleCardClick = () => {
       handleCardClick(this._name, this._image);
     };
   }
-  
+
   _getTemplate() {
     this._card = document
       .querySelector(this._elementSelector)
@@ -21,6 +22,16 @@ export default class Card {
     this._imageContainer = this._card.querySelector(".element__image");
     this._nameContainer = this._card.querySelector(".element__name");
     this._likeButton = this._card.querySelector(".element__like-button");
+    this._likeCounter = this._card.querySelector(".element__like-counter");
+    /* this._likeCounter.textContent = this._likeArray.length; */
+  }
+
+  _increaseLike() {
+    this._likeCounter.textContent = `${this._likeArray.length + 1}`;
+  }
+
+  _decreaseLike() {
+    this._likeCounter.textContent = `${this._likeArray.length - 1}`;
   }
 
   _addDataToCard() {
@@ -32,7 +43,7 @@ export default class Card {
   _setEventListeners() {
     this._garbageButton.addEventListener("click", this._removeCard);
 
-    this._likeButton.addEventListener("click", this._toggleCardLikeButton);
+    this._likeButton.addEventListener("click", this._handleCardLikeButton);
 
     this._imageContainer.addEventListener("click", this._handleCardClick);
   }
@@ -42,8 +53,11 @@ export default class Card {
     this._card = null;
   };
 
-  _toggleCardLikeButton = () => {
+  _handleCardLikeButton = () => {
     this._likeButton.classList.toggle("element__like-button_active");
+    this._likeButton.classList.contains("element__like-button_active")
+      ? this._increaseLike()
+      : this._decreaseLike();
   };
 
   generateCard() {
