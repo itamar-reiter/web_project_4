@@ -1,5 +1,6 @@
 import "./index.css";
-import cards from "../utils/cards.js";
+//import cards from "../utils/cards.js";
+ import Api from "../classess/Api.js";
 import Card from "../classess/Card.js";
 import FormValidator from "../classess/FormValidator.js";
 import * as constants from "../utils/constants.js";
@@ -7,7 +8,6 @@ import PopupWithImage from "../classess/PopupWithImage.js";
 import PopupWithForm from "../classess/PopupWithForm.js";
 import UserInfo from "../classess/UserInfo.js";
 import Section from "../classess/Section.js";
-import Api from "../classess/Api.js";
 
 //instance for api
 const getApi = new Api(constants.apiData);
@@ -28,6 +28,7 @@ const popupCardForm = new PopupWithForm(
   ".popup_type_add-photo",
   (inputValue) => {
     cardSection.renderItems([inputValue]);
+    getApi.saveNewCard(inputValue);
     popupCardForm.close();
   }
 );

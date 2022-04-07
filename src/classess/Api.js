@@ -47,7 +47,7 @@ export default class Api {
       }),
     });
   }
-  addNewCard() {
+  saveNewCard(data) {
     fetch(`${this._serverAdress}/v1/${this._groupId}/cards`, {
       method: "POST",
       headers: {
@@ -55,8 +55,8 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "",
-        link: "",
+        name: data.name,
+        link: data.link,
       }),
     });
   }
