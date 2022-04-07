@@ -20,19 +20,20 @@ export default class Api {
   }
 
   getInitialCards() {
-    fetch(`${this._serverAdress}/v1/${this._groupId}/cards`, {
+    return fetch(`${this._serverAdress}/v1/${this._groupId}/cards`, {
       method: "GET",
       headers: {
         authorization: this._token,
       },
     })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res);
-      });
+    .then((res) => {
+      return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
+  
   editProfileData() {
     fetch(`${this._serverAdress}/v1/${this._groupId}/users/me`, {
       method: "PATCH",

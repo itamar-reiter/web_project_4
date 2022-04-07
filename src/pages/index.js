@@ -39,7 +39,7 @@ const popupImage = new PopupWithImage(".popup_type_image");
 const cardSection = new Section((item) => {
   const renderedCard = new Card(
     item.link,
-    item.title,
+    item.name,
     "#cardTemplate",
     createPopupImage
   );
@@ -88,7 +88,11 @@ getApi.getUserInfo().then((res) => {
   userInfo.setUserInfo(res.name, res.about);
 })
 //set initialCards from the server
+getApi.getInitialCards().then((cards) => {
+console.log(cards);
 cardSection.renderItems(cards);
+})
+
 setEventListeners();
 initFormValidating(popupProfileForm.popup);
 initFormValidating(popupCardForm.popup);
