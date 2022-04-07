@@ -10,9 +10,7 @@ import Section from "../classess/Section.js";
 import Api from "../classess/Api.js";
 
 //instance for api
-const initApi = new Api(constants.apiData);
-const userSettings = initApi.getUserSettings();
-const serverCards = initApi.getInitialCards();
+const getApi = new Api(constants.apiData);
 
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(
@@ -84,8 +82,12 @@ function setEventListeners() {
     popupCardForm.open();
   });
 }
-
-//set initialCards
+//set user info and user image from the server
+getApi.getUserInfo().then((res) => {
+  console.log(res);
+  userInfo.setUserInfo(res.name, res.about);
+})
+//set initialCards from the server
 cardSection.renderItems(cards);
 setEventListeners();
 initFormValidating(popupProfileForm.popup);

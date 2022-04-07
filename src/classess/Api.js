@@ -4,18 +4,18 @@ export default class Api {
     this._token = data.token;
     this._serverAdress = data.serverAdress;
   }
-  getUserSettings() {
-    fetch(`${this._serverAdress}/v1/${this._groupId}/users/me`, {
+  getUserInfo() {
+    return fetch(`${this._serverAdress}/v1/${this._groupId}/users/me`, {
       method: "GET",
       headers: {
         authorization: this._token,
       },
     })
       .then((res) => {
-        return res.json();
+        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
       })
-      .then((res) => {
-        console.log(res);
+      .catch((err) => {
+        console.log(err);
       });
   }
 
