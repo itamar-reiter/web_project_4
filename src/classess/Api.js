@@ -33,17 +33,17 @@ export default class Api {
       console.log(err);
     });
   }
-  
-  editProfileData() {
-    fetch(`${this._serverAdress}/v1/${this._groupId}/users/me`, {
+
+  saveProfileData(nameValue, aboutValue) {
+    return fetch(`${this._serverAdress}/v1/${this._groupId}/users/me`, {
       method: "PATCH",
       headers: {
         authorization: this._token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "",
-        about: "",
+        name: nameValue,
+        about: aboutValue,
       }),
     });
   }
