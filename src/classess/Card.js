@@ -1,14 +1,21 @@
 //createCard template -> add content to it -> add event listeners -> display it on the screen ->
 export default class Card {
-  constructor(image, name, elementSelector, handleCardClick) {
+  constructor(
+    image,
+    name,
+    elementSelector,
+    handleCardClick,
+    popupConfirmation
+  ) {
     this._image = image;
     this._name = name;
     this._elementSelector = elementSelector;
     this._handleCardClick = () => {
       handleCardClick(this._name, this._image);
     };
+    this._popupConfirmation = popupConfirmation;
   }
-  
+
   _getTemplate() {
     this._card = document
       .querySelector(this._elementSelector)
@@ -30,7 +37,9 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._garbageButton.addEventListener("click", this._removeCard);
+    this._garbageButton.addEventListener("click", () => {
+      this._popupConfirmation.open();
+    });
 
     this._likeButton.addEventListener("click", this._toggleCardLikeButton);
 

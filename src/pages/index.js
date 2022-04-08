@@ -8,6 +8,7 @@ import PopupWithImage from "../classess/PopupWithImage.js";
 import PopupWithForm from "../classess/PopupWithForm.js";
 import UserInfo from "../classess/UserInfo.js";
 import Section from "../classess/Section.js";
+import PopupWithConfirmation from "../classess/PopupWithConfirmation.js";
 
 //instance for api
 const getApi = new Api(constants.apiData);
@@ -37,15 +38,28 @@ popupCardForm.setEventListeners();
 //instance for popupImage
 const popupImage = new PopupWithImage(".popup_type_image");
 
+//instance for confirmation popup
+const popupConfirmation = new PopupWithConfirmation(".popup_type_confirmation", (card) => {
+  //delete the card from the server
+  //delete the card from the page
+  //close the popup
+  console.log("popupConfirmation has submited");
+  card.remove();
+  card = null;
+  popupConfirmation.close();
+});
+
 //instance for Section
 const cardSection = new Section((item) => {
   const renderedCard = new Card(
     item.link,
     item.name,
     "#cardTemplate",
-    createPopupImage
+    createPopupImage,
+    popupConfirmation
   );
   cardSection.setItem(renderedCard.generateCard());
+  popupConfirmation.setEventListeners(renderedCard.generateCard());
 }, ".grid-elements");
 
 //instance for getUserInfo dlivered to profileForm inputs
