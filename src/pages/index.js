@@ -25,7 +25,7 @@ const popupProfileForm = new PopupWithForm(
 popupProfileForm.setEventListeners();
 
 //instance for userImage form
-const userImageForm = new PopupWithForm(
+const popupProfileImageForm = new PopupWithForm(
   ".popup_type_change-image",
   (inputValue) => {
     constants.userImage.style.backgroundImage =
@@ -33,10 +33,10 @@ const userImageForm = new PopupWithForm(
   url(` +
       inputValue.imageUrl +
       `)`;
-    userImageForm.close();
+    popupProfileImageForm.close();
   }
 );
-userImageForm.setEventListeners();
+popupProfileImageForm.setEventListeners();
 //instance for cardForm
 const popupCardForm = new PopupWithForm(
   ".popup_type_add-photo",
@@ -101,7 +101,7 @@ function initFormValidating(formElement) {
 function setEventListeners() {
   //profile-image event listeners
   constants.userImage.addEventListener("click", () => {
-    userImageForm.open();
+    popupProfileImageForm.open();
   });
   //edit button event listeners
   constants.editButton.addEventListener("click", () => {
@@ -126,5 +126,6 @@ getApi.getInitialCards().then((cards) => {
 });
 
 setEventListeners();
+initFormValidating(popupProfileImageForm.popup);
 initFormValidating(popupProfileForm.popup);
 initFormValidating(popupCardForm.popup);
