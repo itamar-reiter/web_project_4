@@ -5,6 +5,7 @@ export const apiData = {
   serverAdress: "https://around.nomoreparties.co"
 }
 export const profile = document.querySelector(".profile");
+export const userImage = document.querySelector(".user-image");
 export const profileName = profile.querySelector(".profile__name");
 export const profileAboutMe = profile.querySelector(".profile__about-me");
 export const editButton = profile.querySelector("#editButton");

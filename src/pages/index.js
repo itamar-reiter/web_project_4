@@ -1,6 +1,6 @@
 import "./index.css";
 //import cards from "../utils/cards.js";
- import Api from "../classess/Api.js";
+import Api from "../classess/Api.js";
 import Card from "../classess/Card.js";
 import FormValidator from "../classess/FormValidator.js";
 import * as constants from "../utils/constants.js";
@@ -23,6 +23,19 @@ const popupProfileForm = new PopupWithForm(
 );
 popupProfileForm.setEventListeners();
 
+//instance for userImage form
+const userImageForm = new PopupWithForm(
+  ".popup_type_change-image",
+  (inputValue) => {
+    constants.userImage.style.backgroundImage =
+      `
+  url(` +
+      inputValue.imageUrl +
+      `)`;
+    userImageForm.close();
+  }
+);
+userImageForm.setEventListeners();
 //instance for cardForm
 const popupCardForm = new PopupWithForm(
   ".popup_type_add-photo",
@@ -73,6 +86,10 @@ function initFormValidating(formElement) {
 
 //setting eventListeners for buttons on the page
 function setEventListeners() {
+  //profile-image event listeners
+  constants.userImage.addEventListener("click", () => {
+    userImageForm.open();
+  });
   //edit button event listeners
   constants.editButton.addEventListener("click", () => {
     addUserInfo();
@@ -88,12 +105,12 @@ function setEventListeners() {
 getApi.getUserInfo().then((res) => {
   console.log(res);
   userInfo.setUserInfo(res.name, res.about);
-})
+});
 //set initialCards from the server
 getApi.getInitialCards().then((cards) => {
-console.log(cards);
-cardSection.renderItems(cards);
-})
+  console.log(cards);
+  cardSection.renderItems(cards);
+});
 
 setEventListeners();
 initFormValidating(popupProfileForm.popup);

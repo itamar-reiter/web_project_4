@@ -41,6 +41,34 @@
     <footer class="footer">
       <p class="footer__copyright">© 2021 Around The U.S.</p>
     </footer>
+    <div class="popup popup_type_change-image">
+      <div class="popup__container">
+        <button
+          type="button"
+          id="closeChangeImage"
+          class="popup__close-icon popup__close-icon_type_form"
+        ></button>
+        <h2 class="popup__title">Change profile picture</h2>
+        <form class="popup__form popup__form_type_change-image" novalidate>
+          <input
+            class="popup__input popup__input_type_image-url"
+            type="text"
+            name="imageUrl"
+            id="imageUrl"
+            placeholder="picture link"
+            minlength="2"
+            maxlength="40"
+            required
+          />
+          <span
+            class="popup__error-message popup__error-message_type_imageUrl"
+          ></span>
+          <button type="submit" id="saveImageChange" class="popup__submit-button">
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
     <div class="popup popup_type_edit-profile">
       <div class="popup__container">
         <button
