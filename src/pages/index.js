@@ -59,7 +59,6 @@ const cardSection = new Section((item) => {
     popupConfirmation
   );
   cardSection.setItem(renderedCard.generateCard());
-  popupConfirmation.setEventListeners(renderedCard.generateCard());
 }, ".grid-elements");
 
 //instance for getUserInfo dlivered to profileForm inputs

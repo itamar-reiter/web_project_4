@@ -37,13 +37,16 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._garbageButton.addEventListener("click", () => {
-      this._popupConfirmation.open();
-    });
+    this._garbageButton.addEventListener("click", this._handleGarbageClick);
 
     this._likeButton.addEventListener("click", this._toggleCardLikeButton);
 
     this._imageContainer.addEventListener("click", this._handleCardClick);
+  }
+
+  _handleGarbageClick = () => {
+    this._popupConfirmation.open();
+    this._popupConfirmation.setEventListeners(this._card);
   }
 
   _removeCard = () => {
