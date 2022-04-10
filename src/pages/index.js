@@ -13,6 +13,17 @@ import PopupWithConfirmation from "../classess/PopupWithConfirmation.js";
 //instance for api
 const getApi = new Api(constants.apiData);
 
+const getUserImage = () => {
+  getApi.getUserInfo().then(res => {
+    constants.userImage.style.backgroundImage =     `
+    url(` +
+        res.avatar +
+        `)`;    
+  });
+}
+
+getUserImage();
+
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(
   ".popup_type_edit-profile",
@@ -28,11 +39,10 @@ popupProfileForm.setEventListeners();
 const popupProfileImageForm = new PopupWithForm(
   ".popup_type_change-image",
   (inputValue) => {
-    constants.userImage.style.backgroundImage =
-      `
-  url(` +
-      inputValue.imageUrl +
-      `)`;
+    getApi.updateProfilePicture(inputValue.imageUrl)
+    .then(() => {
+      getUserImage();
+    });  
     popupProfileImageForm.close();
   }
 );

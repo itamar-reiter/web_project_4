@@ -47,6 +47,19 @@ export default class Api {
       }),
     });
   }
+  
+  updateProfilePicture(avatarValue) {
+    return fetch(`${this._serverAdress}/v1/${this._groupId}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar: avatarValue,
+      }),
+    });
+  }
 
   saveNewCard(data) {
     return fetch(`${this._serverAdress}/v1/${this._groupId}/cards`, {
