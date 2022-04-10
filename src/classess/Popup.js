@@ -37,4 +37,14 @@ export default class Popup {
       this.close();
     }
   };
+
+  submitSaving = (isLoading, defaultText) => {
+    if (isLoading) {
+      this.popup.querySelector(".popup__submit-button").textContent =
+        "Saving...";
+    } else {
+      this.popup.querySelector(".popup__submit-button").textContent =
+        defaultText;
+    }
+  };
 }

@@ -28,8 +28,12 @@ getUserImage();
 const popupProfileForm = new PopupWithForm(
   ".popup_type_edit-profile",
   (inputValue) => {
+    popupProfileForm.submitSaving(true, "save");
     userInfo.setUserInfo(inputValue.name, inputValue.aboutMe);
-    getApi.saveProfileData(inputValue.name, inputValue.aboutMe);
+    getApi.saveProfileData(inputValue.name, inputValue.aboutMe)
+    .finally(() => {
+      popupProfileForm.submitSaving(false, "save");
+    });
     popupProfileForm.close();
   }
 );
@@ -39,9 +43,13 @@ popupProfileForm.setEventListeners();
 const popupProfileImageForm = new PopupWithForm(
   ".popup_type_change-image",
   (inputValue) => {
+    popupProfileImageForm.submitSaving(true, "save");
     getApi.updateProfilePicture(inputValue.imageUrl)
     .then(() => {
       getUserImage();
+    })
+    .finally(() => {
+      popupProfileImageForm.submitSaving(false, "save");
     });  
     popupProfileImageForm.close();
   }
