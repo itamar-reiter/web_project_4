@@ -54,11 +54,9 @@ const popupImage = new PopupWithImage(".popup_type_image");
 //instance for confirmation popup
 const popupConfirmation = new PopupWithConfirmation(
   ".popup_type_confirmation",
-  (card) => {
-    //delete the card from the server
-    //delete the card from the page
-    //close the popup
+  (card, cardData) => {
     console.log("popupConfirmation has submited");
+    getApi.deleteCard(cardData._id);
     card.remove();
     card = null;
     popupConfirmation.close();

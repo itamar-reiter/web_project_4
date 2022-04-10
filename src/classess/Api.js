@@ -26,12 +26,12 @@ export default class Api {
         authorization: this._token,
       },
     })
-    .then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((res) => {
+        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   saveProfileData(nameValue, aboutValue) {
@@ -47,6 +47,7 @@ export default class Api {
       }),
     });
   }
+
   saveNewCard(data) {
     fetch(`${this._serverAdress}/v1/${this._groupId}/cards`, {
       method: "POST",
@@ -60,4 +61,14 @@ export default class Api {
       }),
     });
   }
+
+  deleteCard(cardId) {
+    return fetch(`${this._serverAdress}/v1/${this._groupId}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._token,
+      },
+    });
+  }
+  
 }

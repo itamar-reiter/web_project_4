@@ -58,7 +58,7 @@ export default class Card {
 
   _handleGarbageClick = () => {
     this._popupConfirmation.open();
-    this._popupConfirmation.setEventListeners(this._card);
+    this._popupConfirmation.setEventListeners(this._card, this._cardData);
   };
 
   _removeCard = () => {
