@@ -41,12 +41,18 @@ popupProfileImageForm.setEventListeners();
 const popupCardForm = new PopupWithForm(
   ".popup_type_add-photo",
   (inputValue) => {
+    createNewLikeArray(inputValue);
     cardSection.renderItems([inputValue]);
     getApi.saveNewCard(inputValue);
     popupCardForm.close();
   }
 );
 popupCardForm.setEventListeners();
+
+//create new like array
+const createNewLikeArray = (inputValue) => {
+   return inputValue.likes = [];
+}
 
 //instance for popupImage
 const popupImage = new PopupWithImage(".popup_type_image");
@@ -67,6 +73,7 @@ const cardSection = new Section((item) => {
   const renderedCard = new Card(
     item.link,
     item.name,
+    item.likes,
     "#cardTemplate",
     createPopupImage,
     popupConfirmation
@@ -114,6 +121,7 @@ function setEventListeners() {
     popupCardForm.open();
   });
 }
+
 //set user info and user image from the server
 getApi.getUserInfo().then((res) => {
   console.log(res);
