@@ -1,6 +1,6 @@
 import "./index.css";
 //import cards from "../utils/cards.js";
- import Api from "../classess/Api.js";
+import Api from "../classess/Api.js";
 import Card from "../classess/Card.js";
 import FormValidator from "../classess/FormValidator.js";
 import * as constants from "../utils/constants.js";
@@ -42,6 +42,7 @@ const cardSection = new Section((item) => {
   const renderedCard = new Card(
     item.link,
     item.name,
+    item.likes,
     "#cardTemplate",
     createPopupImage
   );
@@ -84,16 +85,17 @@ function setEventListeners() {
     popupCardForm.open();
   });
 }
+
 //set user info and user image from the server
 getApi.getUserInfo().then((res) => {
   console.log(res);
   userInfo.setUserInfo(res.name, res.about);
-})
+});
 //set initialCards from the server
 getApi.getInitialCards().then((cards) => {
-console.log(cards);
-cardSection.renderItems(cards);
-})
+  console.log(cards);
+  cardSection.renderItems(cards);
+});
 
 setEventListeners();
 initFormValidating(popupProfileForm.popup);
