@@ -41,8 +41,12 @@ popupProfileImageForm.setEventListeners();
 const popupCardForm = new PopupWithForm(
   ".popup_type_add-photo",
   (inputValue) => {
-    cardSection.renderItems([inputValue]);
-    getApi.saveNewCard(inputValue);
+    getApi
+      .saveNewCard(inputValue)
+      .then((res) => {
+        console.log(res);
+        cardSection.renderItems([res]);
+      });
     popupCardForm.close();
   }
 );
@@ -69,7 +73,8 @@ const cardSection = new Section((item) => {
     item,
     "#cardTemplate",
     createPopupImage,
-    popupConfirmation
+    popupConfirmation,
+    getApi
   );
   cardSection.setItem(renderedCard.generateCard());
 }, ".grid-elements");

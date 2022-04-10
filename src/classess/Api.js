@@ -49,7 +49,7 @@ export default class Api {
   }
 
   saveNewCard(data) {
-    fetch(`${this._serverAdress}/v1/${this._groupId}/cards`, {
+    return fetch(`${this._serverAdress}/v1/${this._groupId}/cards`, {
       method: "POST",
       headers: {
         authorization: this._token,
@@ -70,5 +70,26 @@ export default class Api {
       },
     });
   }
-  
+
+  putLike(cardId) {
+    return fetch(`${this._serverAdress}/v1/${this._groupId}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: {
+        authorization: this._token,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => res.json());
+  }
+
+  deleteLike(cardId) {
+    return fetch(`${this._serverAdress}/v1/${this._groupId}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._token,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => res.json());
+  }
 }

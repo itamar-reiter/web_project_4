@@ -1,12 +1,19 @@
 //createCard template -> add content to it -> add event listeners -> display it on the screen ->
 export default class Card {
-  constructor(cardData, elementSelector, handleCardClick, popupConfirmation) {
+  constructor(
+    cardData,
+    elementSelector,
+    handleCardClick,
+    popupConfirmation,
+    serverRequest
+  ) {
     this._cardData = cardData;
     this._elementSelector = elementSelector;
     this._handleCardClick = () => {
       handleCardClick(this._cardData.name, this._cardData.link);
     };
     this._popupConfirmation = popupConfirmation;
+    this._serverRequest = serverRequest;
   }
 
   _getTemplate() {
@@ -25,7 +32,10 @@ export default class Card {
   }
 
   _displayGarbageIcon = () => {
-    if (!this._cardData.owner || this._cardData.owner._id === "2e5154ce112b4a6ba0a11409") {
+    if (
+      !this._cardData.owner ||
+      this._cardData.owner._id === "2e5154ce112b4a6ba0a11409"
+    ) {
       this._garbageButton.classList.add("element__garbage-button_active");
     }
   };
@@ -41,11 +51,25 @@ export default class Card {
     if (!this._cardData.likes) {
       this._cardData.likes = [];
     }
-    this._likeCounter.textContent = `${this._cardData.likes.length}`;
+    this._likeCounter.textContent = this._cardData.likes.length;
+  }
+
+  _decreaseLike() {
+    this._serverRequest
+      .deleteLike(this._cardData._id)
+      .then((res) => {
+        console.log(res);
+        this._likeCounter.textContent = `${res.likes.length}`;
+      });
   }
 
   _increaseLike() {
-    this._likeCounter.textContent = `${this._cardData.likes.length + 1}`;
+    this._serverRequest
+      .putLike(this._cardData._id)
+      .then((res) => {
+        console.log(res);
+        this._likeCounter.textContent = `${res.likes.length}`;
+      });
   }
 
   _setEventListeners() {
@@ -70,7 +94,7 @@ export default class Card {
     this._likeButton.classList.toggle("element__like-button_active");
     this._likeButton.classList.contains("element__like-button_active")
       ? this._increaseLike()
-      : this._initLike();
+      : this._decreaseLike();
   };
 
   generateCard() {
