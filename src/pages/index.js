@@ -41,7 +41,6 @@ popupProfileImageForm.setEventListeners();
 const popupCardForm = new PopupWithForm(
   ".popup_type_add-photo",
   (inputValue) => {
-    createNewLikeArray(inputValue);
     cardSection.renderItems([inputValue]);
     getApi.saveNewCard(inputValue);
     popupCardForm.close();
@@ -49,31 +48,27 @@ const popupCardForm = new PopupWithForm(
 );
 popupCardForm.setEventListeners();
 
-//create new like array
-const createNewLikeArray = (inputValue) => {
-   return inputValue.likes = [];
-}
-
 //instance for popupImage
 const popupImage = new PopupWithImage(".popup_type_image");
 
 //instance for confirmation popup
-const popupConfirmation = new PopupWithConfirmation(".popup_type_confirmation", (card) => {
-  //delete the card from the server
-  //delete the card from the page
-  //close the popup
-  console.log("popupConfirmation has submited");
-  card.remove();
-  card = null;
-  popupConfirmation.close();
-});
+const popupConfirmation = new PopupWithConfirmation(
+  ".popup_type_confirmation",
+  (card) => {
+    //delete the card from the server
+    //delete the card from the page
+    //close the popup
+    console.log("popupConfirmation has submited");
+    card.remove();
+    card = null;
+    popupConfirmation.close();
+  }
+);
 
 //instance for Section
 const cardSection = new Section((item) => {
   const renderedCard = new Card(
-    item.link,
-    item.name,
-    item.likes,
+    item,
     "#cardTemplate",
     createPopupImage,
     popupConfirmation

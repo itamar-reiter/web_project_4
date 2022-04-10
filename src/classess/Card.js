@@ -1,12 +1,10 @@
 //createCard template -> add content to it -> add event listeners -> display it on the screen ->
 export default class Card {
-  constructor(image, name, likeArray, elementSelector, handleCardClick, popupConfirmation) {
-    this._image = image;
-    this._name = name;
-    this._likeArray = likeArray;
+  constructor(cardData, elementSelector, handleCardClick, popupConfirmation) {
+    this._cardData = cardData;
     this._elementSelector = elementSelector;
     this._handleCardClick = () => {
-      handleCardClick(this._name, this._image);
+      handleCardClick(this._cardData.name, this._cardData.link);
     };
     this._popupConfirmation = popupConfirmation;
   }
@@ -26,19 +24,28 @@ export default class Card {
     this._likeCounter = this._card.querySelector(".element__like-counter");
   }
 
-  _increaseLike() {
-    this._likeCounter.textContent = `${this._likeArray.length + 1}`;
+  _displayGarbageIcon = () => {
+    if (!this._cardData.owner || this._cardData.owner._id === "2e5154ce112b4a6ba0a11409") {
+      this._garbageButton.classList.add("element__garbage-button_active");
+    }
+  };
+
+  _addDataToCard() {
+    this._nameContainer.textContent = this._cardData.name;
+    this._imageContainer.alt = this._cardData.name;
+    this._imageContainer.src = this._cardData.link;
+    this._initLike();
   }
 
   _initLike() {
-    this._likeCounter.textContent = `${this._likeArray.length}`;
+    if (!this._cardData.likes) {
+      this._cardData.likes = [];
+    }
+    this._likeCounter.textContent = `${this._cardData.likes.length}`;
   }
 
-  _addDataToCard() {
-    this._nameContainer.textContent = this._name;
-    this._imageContainer.alt = this._name;
-    this._imageContainer.src = this._image;
-    this._initLike();
+  _increaseLike() {
+    this._likeCounter.textContent = `${this._cardData.likes.length + 1}`;
   }
 
   _setEventListeners() {
@@ -52,7 +59,7 @@ export default class Card {
   _handleGarbageClick = () => {
     this._popupConfirmation.open();
     this._popupConfirmation.setEventListeners(this._card);
-  }
+  };
 
   _removeCard = () => {
     this._card.remove();
@@ -69,6 +76,7 @@ export default class Card {
   generateCard() {
     this._getTemplate();
     this._defineCardVariables();
+    this._displayGarbageIcon();
     this._addDataToCard();
     this._setEventListeners();
 

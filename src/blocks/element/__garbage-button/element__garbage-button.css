@@ -1,5 +1,6 @@
 .element__garbage-button{
   position: absolute;
+  display: none;
   top: 18px;
   right: 15px;
   width: 18px;
