@@ -24,7 +24,7 @@ const userInfo = new UserInfo(
 const popupProfileImageForm = new PopupWithForm(
   ".popup_type_change-image",
   (inputValue) => {
-    popupProfileImageForm.submitSaving(true, "save");
+    popupProfileImageForm.apllySubmittingText(true, "save");
     getApi
       .updateProfilePicture(inputValue.imageUrl)
       .then((res) => {
@@ -32,7 +32,7 @@ const popupProfileImageForm = new PopupWithForm(
       })
       .finally(() => {
         popupProfileImageForm.close();
-        popupProfileImageForm.submitSaving(false, "save");
+        popupProfileImageForm.apllySubmittingText(false, "save");
       });
   }
 );
@@ -42,7 +42,7 @@ popupProfileImageForm.setEventListeners();
 const popupProfileForm = new PopupWithForm(
   ".popup_type_edit-profile",
   (inputValue) => {
-    popupProfileForm.submitSaving(true, "save");
+    popupProfileForm.apllySubmittingText(true, "save");
     getApi
       .saveProfileData(inputValue.name, inputValue.aboutMe)
       .then((res) => {
@@ -50,7 +50,7 @@ const popupProfileForm = new PopupWithForm(
         userInfo.setUserInfo(res.name, res.about);
       })
       .finally(() => {
-        popupProfileForm.submitSaving(false, "save");
+        popupProfileForm.apllySubmittingText(false, "save");
         popupProfileForm.close();
       });
   }
@@ -61,7 +61,7 @@ popupProfileForm.setEventListeners();
 const popupCardForm = new PopupWithForm(
   ".popup_type_add-photo",
   (inputValue) => {
-    popupCardForm.submitSaving(true, "Create");
+    popupCardForm.apllySubmittingText(true, "Create");
     getApi
       .saveNewCard(inputValue)
       .then((res) => {
@@ -70,11 +70,23 @@ const popupCardForm = new PopupWithForm(
       })
       .finally(() => {
         popupCardForm.close();
-        popupCardForm.submitSaving(false, "Create");
+        popupCardForm.apllySubmittingText(false, "Create");
       });
   }
 );
 popupCardForm.setEventListeners();
+
+//instance for Section
+const cardSection = new Section((item) => {
+  const renderedCard = new Card(
+    item,
+    "#cardTemplate",
+    createPopupImage,
+    popupConfirmation,
+    getApi
+  );
+  cardSection.setItem(renderedCard.generateCard());
+}, ".grid-elements");
 
 //instance for popupImage
 const popupImage = new PopupWithImage(".popup_type_image");
@@ -91,22 +103,9 @@ const popupConfirmation = new PopupWithConfirmation(
   }
 );
 
-//instance for Section
-const cardSection = new Section((item) => {
-  const renderedCard = new Card(
-    item,
-    "#cardTemplate",
-    createPopupImage,
-    popupConfirmation,
-    getApi
-  );
-  cardSection.setItem(renderedCard.generateCard());
-}, ".grid-elements");
-
 //instance for getUserInfo dlivered to profileForm inputs
 function addUserInfo() {
   const userData = userInfo.getUserInfo();
-  //console.log(userData);
   popupProfileForm.setInputValues(userData);
 }
 

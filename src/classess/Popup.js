@@ -38,7 +38,7 @@ export default class Popup {
     }
   };
 
-  submitSaving = (isLoading, defaultText) => {
+  apllySubmittingText = (isLoading, defaultText) => {
     if (isLoading) {
       this.popup.querySelector(".popup__submit-button").textContent =
         "Saving...";
