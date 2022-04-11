@@ -44,32 +44,19 @@ export default class Card {
     this._nameContainer.textContent = this._cardData.name;
     this._imageContainer.alt = this._cardData.name;
     this._imageContainer.src = this._cardData.link;
-    this._initLike();
-  }
-
-  _initLike() {
-    if (!this._cardData.likes) {
-      this._cardData.likes = [];
-    }
     this._likeCounter.textContent = this._cardData.likes.length;
   }
 
   _decreaseLike() {
-    this._serverRequest
-      .deleteLike(this._cardData._id)
-      .then((res) => {
-        console.log(res);
-        this._likeCounter.textContent = `${res.likes.length}`;
-      });
+    this._serverRequest.deleteLike(this._cardData._id).then((res) => {
+      this._likeCounter.textContent = `${res.likes.length}`;
+    });
   }
 
   _increaseLike() {
-    this._serverRequest
-      .putLike(this._cardData._id)
-      .then((res) => {
-        console.log(res);
-        this._likeCounter.textContent = `${res.likes.length}`;
-      });
+    this._serverRequest.putLike(this._cardData._id).then((res) => {
+      this._likeCounter.textContent = `${res.likes.length}`;
+    });
   }
 
   _setEventListeners() {

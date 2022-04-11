@@ -112,7 +112,13 @@ export default class Api {
           "Content-Type": "application/json",
         },
       }
-    ).then((res) => res.json());
+    )
+      .then((res) => {
+        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   deleteLike(cardId) {
@@ -125,6 +131,12 @@ export default class Api {
           "Content-Type": "application/json",
         },
       }
-    ).then((res) => res.json());
+    )
+      .then((res) => {
+        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
