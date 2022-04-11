@@ -46,7 +46,6 @@ const popupProfileForm = new PopupWithForm(
     getApi
       .saveProfileData(inputValue.name, inputValue.aboutMe)
       .then((res) => {
-        console.log(res);
         userInfo.setUserInfo(res.name, res.about);
       })
       .finally(() => {
@@ -65,7 +64,6 @@ const popupCardForm = new PopupWithForm(
     getApi
       .saveNewCard(inputValue)
       .then((res) => {
-        console.log(res);
         cardSection.renderItems([res]);
       })
       .finally(() => {
@@ -95,7 +93,6 @@ const popupImage = new PopupWithImage(".popup_type_image");
 const popupConfirmation = new PopupWithConfirmation(
   ".popup_type_confirmation",
   (card, cardData) => {
-    console.log("popupConfirmation has submited");
     getApi.deleteCard(cardData._id);
     card.remove();
     card = null;
@@ -148,7 +145,6 @@ getApi.getUserInfo().then((res) => {
 
 //set initialCards from the server
 getApi.getInitialCards().then((cards) => {
-  console.log(cards);
   cardSection.renderItems(cards);
 });
 
