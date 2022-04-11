@@ -43,11 +43,16 @@ const popupProfileForm = new PopupWithForm(
   ".popup_type_edit-profile",
   (inputValue) => {
     popupProfileForm.submitSaving(true, "save");
-    userInfo.setUserInfo(inputValue.name, inputValue.aboutMe);
-    getApi.saveProfileData(inputValue.name, inputValue.aboutMe).finally(() => {
-      popupProfileForm.submitSaving(false, "save");
-    });
-    popupProfileForm.close();
+    getApi
+      .saveProfileData(inputValue.name, inputValue.aboutMe)
+      .then((res) => {
+        console.log(res);
+        userInfo.setUserInfo(res.name, res.about);
+      })
+      .finally(() => {
+        popupProfileForm.submitSaving(false, "save");
+        popupProfileForm.close();
+      });
   }
 );
 popupProfileForm.setEventListeners();
