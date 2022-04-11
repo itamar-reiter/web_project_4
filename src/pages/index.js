@@ -61,11 +61,17 @@ popupProfileForm.setEventListeners();
 const popupCardForm = new PopupWithForm(
   ".popup_type_add-photo",
   (inputValue) => {
-    getApi.saveNewCard(inputValue).then((res) => {
-      console.log(res);
-      cardSection.renderItems([res]);
-    });
-    popupCardForm.close();
+    popupCardForm.submitSaving(true, "Create");
+    getApi
+      .saveNewCard(inputValue)
+      .then((res) => {
+        console.log(res);
+        cardSection.renderItems([res]);
+      })
+      .finally(() => {
+        popupCardForm.close();
+        popupCardForm.submitSaving(false, "Create");
+      });
   }
 );
 popupCardForm.setEventListeners();

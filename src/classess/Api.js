@@ -46,14 +46,14 @@ export default class Api {
         about: aboutValue,
       }),
     })
-    .then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((res) => {
+        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  
+
   updateProfilePicture(avatarValue) {
     return fetch(`${this._serverAdress}/v1/${this._groupId}/users/me/avatar`, {
       method: "PATCH",
@@ -65,12 +65,12 @@ export default class Api {
         avatar: avatarValue,
       }),
     })
-    .then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((res) => {
+        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   saveNewCard(data) {
@@ -84,7 +84,13 @@ export default class Api {
         name: data.name,
         link: data.link,
       }),
-    });
+    })
+      .then((res) => {
+        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   deleteCard(cardId) {
@@ -97,24 +103,28 @@ export default class Api {
   }
 
   putLike(cardId) {
-    return fetch(`${this._serverAdress}/v1/${this._groupId}/cards/likes/${cardId}`, {
-      method: "PUT",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => res.json());
+    return fetch(
+      `${this._serverAdress}/v1/${this._groupId}/cards/likes/${cardId}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: this._token,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
   }
 
   deleteLike(cardId) {
-    return fetch(`${this._serverAdress}/v1/${this._groupId}/cards/likes/${cardId}`, {
-      method: "DELETE",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => res.json());
+    return fetch(
+      `${this._serverAdress}/v1/${this._groupId}/cards/likes/${cardId}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: this._token,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
   }
 }
