@@ -58,6 +58,12 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatarValue,
       }),
+    })
+    .then((res) => {
+      return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log(err);
     });
   }
 

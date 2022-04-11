@@ -13,16 +13,30 @@ import PopupWithConfirmation from "../classess/PopupWithConfirmation.js";
 //instance for api
 const getApi = new Api(constants.apiData);
 
-const getUserImage = () => {
-  getApi.getUserInfo().then(res => {
-    constants.userImage.style.backgroundImage =     `
-    url(` +
-        res.avatar +
-        `)`;    
-  });
-}
+//instance for userInfo
+const userInfo = new UserInfo(
+  ".profile__name",
+  ".profile__about-me",
+  ".user-image"
+);
 
-getUserImage();
+//instance for userImage form
+const popupProfileImageForm = new PopupWithForm(
+  ".popup_type_change-image",
+  (inputValue) => {
+    popupProfileImageForm.submitSaving(true, "save");
+    getApi
+      .updateProfilePicture(inputValue.imageUrl)
+      .then((res) => {
+        userInfo.setUserImage(res.avatar);
+      })
+      .finally(() => {
+        popupProfileImageForm.close();
+        popupProfileImageForm.submitSaving(false, "save");
+      });
+  }
+);
+popupProfileImageForm.setEventListeners();
 
 //instance for profileForm
 const popupProfileForm = new PopupWithForm(
@@ -30,8 +44,7 @@ const popupProfileForm = new PopupWithForm(
   (inputValue) => {
     popupProfileForm.submitSaving(true, "save");
     userInfo.setUserInfo(inputValue.name, inputValue.aboutMe);
-    getApi.saveProfileData(inputValue.name, inputValue.aboutMe)
-    .finally(() => {
+    getApi.saveProfileData(inputValue.name, inputValue.aboutMe).finally(() => {
       popupProfileForm.submitSaving(false, "save");
     });
     popupProfileForm.close();
@@ -39,32 +52,14 @@ const popupProfileForm = new PopupWithForm(
 );
 popupProfileForm.setEventListeners();
 
-//instance for userImage form
-const popupProfileImageForm = new PopupWithForm(
-  ".popup_type_change-image",
-  (inputValue) => {
-    popupProfileImageForm.submitSaving(true, "save");
-    getApi.updateProfilePicture(inputValue.imageUrl)
-    .then(() => {
-      getUserImage();
-    })
-    .finally(() => {
-      popupProfileImageForm.submitSaving(false, "save");
-    });  
-    popupProfileImageForm.close();
-  }
-);
-popupProfileImageForm.setEventListeners();
 //instance for cardForm
 const popupCardForm = new PopupWithForm(
   ".popup_type_add-photo",
   (inputValue) => {
-    getApi
-      .saveNewCard(inputValue)
-      .then((res) => {
-        console.log(res);
-        cardSection.renderItems([res]);
-      });
+    getApi.saveNewCard(inputValue).then((res) => {
+      console.log(res);
+      cardSection.renderItems([res]);
+    });
     popupCardForm.close();
   }
 );
@@ -104,9 +99,6 @@ function addUserInfo() {
   popupProfileForm.setInputValues(userData);
 }
 
-//instance for userInfo
-const userInfo = new UserInfo(".profile__name", ".profile__about-me");
-
 function createPopupImage(title, link) {
   popupImage.open(title, link);
   popupImage.setEventListeners();
@@ -138,11 +130,12 @@ function setEventListeners() {
   });
 }
 
-//set user info and user image from the server
+//set user info and image from the server
 getApi.getUserInfo().then((res) => {
-  console.log(res);
   userInfo.setUserInfo(res.name, res.about);
+  userInfo.setUserImage(res.avatar);
 });
+
 //set initialCards from the server
 getApi.getInitialCards().then((cards) => {
   console.log(cards);
