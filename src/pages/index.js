@@ -145,6 +145,7 @@ getApi.getUserInfo().then((res) => {
 
 //set initialCards from the server
 getApi.getInitialCards().then((cards) => {
+  console.log(cards);
   cardSection.renderItems(cards);
 });
 
