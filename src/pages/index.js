@@ -1,14 +1,14 @@
 import "./index.css";
 //import cards from "../utils/cards.js";
-import Api from "../classess/Api.js";
-import Card from "../classess/Card.js";
-import FormValidator from "../classess/FormValidator.js";
+import Api from "../components/Api.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 import * as constants from "../utils/constants.js";
-import PopupWithImage from "../classess/PopupWithImage.js";
-import PopupWithForm from "../classess/PopupWithForm.js";
-import UserInfo from "../classess/UserInfo.js";
-import Section from "../classess/Section.js";
-import PopupWithConfirmation from "../classess/PopupWithConfirmation.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import Section from "../components/Section.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 //instance for api
 const getApi = new Api(constants.apiData);
