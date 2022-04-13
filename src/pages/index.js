@@ -29,12 +29,12 @@ const popupProfileImageForm = new PopupWithForm(
       .updateProfilePicture(inputValue.imageUrl)
       .then((res) => {
         userInfo.setUserImage(res.avatar);
+        popupProfileImageForm.close();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        popupProfileImageForm.close();
         popupProfileImageForm.apllySubmittingText(false, "save");
       });
   }
@@ -50,13 +50,13 @@ const popupProfileForm = new PopupWithForm(
       .saveProfileData(inputValue.name, inputValue.aboutMe)
       .then((res) => {
         userInfo.setUserInfo(res.name, res.about);
+        popupProfileForm.close();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
         popupProfileForm.apllySubmittingText(false, "save");
-        popupProfileForm.close();
       });
   }
 );
@@ -71,12 +71,12 @@ const popupCardForm = new PopupWithForm(
       .saveNewCard(inputValue)
       .then((res) => {
         cardSection.renderItems([res]);
+        popupCardForm.close();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        popupCardForm.close();
         popupCardForm.apllySubmittingText(false, "Create");
       });
   }
@@ -112,6 +112,7 @@ const popupConfirmation = new PopupWithConfirmation(
               if (card === cards[cards.length - 1]) {
                 currentCard.remove();
                 currentCard = null;
+                popupConfirmation.close();
               }
             }
           });
@@ -119,9 +120,6 @@ const popupConfirmation = new PopupWithConfirmation(
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        popupConfirmation.close();
       });
   }
 );
