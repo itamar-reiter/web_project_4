@@ -67,7 +67,6 @@ export default class Card {
     this._serverRequest.deleteLike(this._cardData._id).then((res) => {
       this._handleLikeStatus(res);
       this._likeCounter.textContent = `${res.likes.length}`;
-      console.log("decrease like");
     });
   }
 
@@ -75,7 +74,6 @@ export default class Card {
     this._serverRequest.putLike(this._cardData._id).then((res) => {
       this._handleLikeStatus(res);
       this._likeCounter.textContent = `${res.likes.length}`;
-      console.log("increase like");
     });
   }
 
