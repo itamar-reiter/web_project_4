@@ -15,11 +15,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       },
-    })
-      .then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => this._checkResponse(res));
   }
 
   getInitialCards() {
@@ -28,11 +24,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       },
-    })
-      .then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => this._checkResponse(res));
   }
 
   saveProfileData(nameValue, aboutValue) {
@@ -46,11 +38,7 @@ export default class Api {
         name: nameValue,
         about: aboutValue,
       }),
-    })
-      .then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => this._checkResponse(res));
   }
 
   updateProfilePicture(avatarValue) {
@@ -63,11 +51,7 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatarValue,
       }),
-    })
-      .then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => this._checkResponse(res));
   }
 
   saveNewCard(data) {
@@ -81,11 +65,7 @@ export default class Api {
         name: data.name,
         link: data.link,
       }),
-    })
-      .then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => this._checkResponse(res));
   }
 
   deleteCard(cardId) {
@@ -94,11 +74,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       },
-    })
-      .then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => this._checkResponse(res));
   }
 
   putLike(cardId) {
@@ -111,11 +87,7 @@ export default class Api {
           "Content-Type": "application/json",
         },
       }
-    )
-      .then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-      });
+    ).then((res) => this._checkResponse(res));
   }
 
   deleteLike(cardId) {
@@ -128,10 +100,6 @@ export default class Api {
           "Content-Type": "application/json",
         },
       }
-    )
-      .then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err);
-      });
+    ).then((res) => this._checkResponse(res));
   }
 }

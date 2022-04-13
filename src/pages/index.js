@@ -30,6 +30,9 @@ const popupProfileImageForm = new PopupWithForm(
       .then((res) => {
         userInfo.setUserImage(res.avatar);
       })
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => {
         popupProfileImageForm.close();
         popupProfileImageForm.apllySubmittingText(false, "save");
@@ -48,6 +51,9 @@ const popupProfileForm = new PopupWithForm(
       .then((res) => {
         userInfo.setUserInfo(res.name, res.about);
       })
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => {
         popupProfileForm.apllySubmittingText(false, "save");
         popupProfileForm.close();
@@ -65,6 +71,9 @@ const popupCardForm = new PopupWithForm(
       .saveNewCard(inputValue)
       .then((res) => {
         cardSection.renderItems([res]);
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         popupCardForm.close();
@@ -93,7 +102,9 @@ const popupImage = new PopupWithImage(".popup_type_image");
 const popupConfirmation = new PopupWithConfirmation(
   ".popup_type_confirmation",
   (card, cardData) => {
-    getApi.deleteCard(cardData._id);
+    getApi.deleteCard(cardData._id).catch((err) => {
+      console.log(err);
+    });
     card.remove();
     card = null;
     popupConfirmation.close();
@@ -138,16 +149,26 @@ function setEventListeners() {
 }
 
 //set user info and image from the server
-getApi.getUserInfo().then((res) => {
-  userInfo.setUserInfo(res.name, res.about);
-  userInfo.setUserImage(res.avatar);
-});
+getApi
+  .getUserInfo()
+  .then((res) => {
+    userInfo.setUserInfo(res.name, res.about);
+    userInfo.setUserImage(res.avatar);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 //set initialCards from the server
-getApi.getInitialCards().then((cards) => {
-  console.log(cards);
-  cardSection.renderItems(cards);
-});
+getApi
+  .getInitialCards()
+  .then((cards) => {
+    console.log(cards);
+    cardSection.renderItems(cards);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 setEventListeners();
 initFormValidating(popupProfileImageForm.popup);
