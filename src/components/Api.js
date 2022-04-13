@@ -99,7 +99,13 @@ export default class Api {
       headers: {
         authorization: this._token,
       },
-    });
+    })
+    .then((res) => {
+      return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    })
+    /* .catch((err) => {
+      console.log(err);
+    }) */;
   }
 
   putLike(cardId) {
