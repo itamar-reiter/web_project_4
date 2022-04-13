@@ -102,13 +102,27 @@ const popupImage = new PopupWithImage(".popup_type_image");
 //instance for confirmation popup
 const popupConfirmation = new PopupWithConfirmation(
   ".popup_type_confirmation",
-  (card, cardData) => {
-    getApi.deleteCard(cardData._id).catch((err) => {
-      console.log(err);
-    });
-    card.remove();
-    card = null;
-    popupConfirmation.close();
+  (currentCard, cardData) => {
+    getApi
+      .deleteCard(cardData._id)
+      .then(() => {
+        getApi.getInitialCards().then((cards) => {
+          cards.forEach((card) => {
+            if (card._id !== cardData._id) {
+              if (card === cards[cards.length - 1]) {
+                currentCard.remove();
+                currentCard = null;
+              }
+            }
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupConfirmation.close();
+      });
   }
 );
 
