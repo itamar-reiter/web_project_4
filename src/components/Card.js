@@ -6,7 +6,7 @@ export default class Card {
     handleCardClick,
     popupConfirmation,
     serverRequest,
-    personalId
+    userId
   ) {
     this._cardData = cardData;
     this._elementSelector = elementSelector;
@@ -15,7 +15,7 @@ export default class Card {
     };
     this._popupConfirmation = popupConfirmation;
     this._serverRequest = serverRequest;
-    this._personalId = personalId;
+    this._userId = userId;
   }
 
   _getTemplate() {
@@ -34,10 +34,7 @@ export default class Card {
   }
 
   _displayGarbageIcon = () => {
-    if (
-      !this._cardData.owner ||
-      this._cardData.owner._id === this._personalId
-    ) {
+    if (!this._cardData.owner || this._cardData.owner._id === this._userId) {
       this._garbageButton.classList.add("element__garbage-button_active");
     }
   };
@@ -52,7 +49,7 @@ export default class Card {
   _handleLikeStatus(card) {
     if (card.likes.length !== 0) {
       card.likes.every((like) => {
-        if (like._id === this._personalId) {
+        if (like._id === this._userId) {
           this._likeButton.classList.add("element__like-button_active");
           return false;
         } else {
@@ -66,23 +63,27 @@ export default class Card {
   }
 
   _decreaseLike() {
-    this._serverRequest.deleteLike(this._cardData._id).then((res) => {
-      this._handleLikeStatus(res);
-      this._likeCounter.textContent = `${res.likes.length}`;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    this._serverRequest
+      .deleteLike(this._cardData._id)
+      .then((res) => {
+        this._handleLikeStatus(res);
+        this._likeCounter.textContent = `${res.likes.length}`;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   _increaseLike() {
-    this._serverRequest.putLike(this._cardData._id).then((res) => {
-      this._handleLikeStatus(res);
-      this._likeCounter.textContent = `${res.likes.length}`;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    this._serverRequest
+      .putLike(this._cardData._id)
+      .then((res) => {
+        this._handleLikeStatus(res);
+        this._likeCounter.textContent = `${res.likes.length}`;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   _setEventListeners() {
