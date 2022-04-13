@@ -99,11 +99,6 @@ export default class Card {
     this._popupConfirmation.setEventListeners(this._card, this._cardData);
   };
 
-  _removeCard = () => {
-    this._card.remove();
-    this._card = null;
-  };
-
   _handleCardLikeButton = () => {
     this._likeButton.classList.contains("element__like-button_active")
       ? this._decreaseLike()
