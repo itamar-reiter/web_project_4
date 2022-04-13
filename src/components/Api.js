@@ -4,6 +4,11 @@ export default class Api {
     this._token = data.token;
     this._serverAdress = data.serverAdress;
   }
+
+  _checkResponse = (res) => {
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  };
+
   getUserInfo() {
     return fetch(`${this._serverAdress}/v1/${this._groupId}/users/me`, {
       method: "GET",
@@ -11,9 +16,7 @@ export default class Api {
         authorization: this._token,
       },
     })
-      .then((res) => {
-        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-      })
+      .then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err);
       });
@@ -26,9 +29,7 @@ export default class Api {
         authorization: this._token,
       },
     })
-      .then((res) => {
-        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-      })
+      .then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err);
       });
@@ -46,9 +47,7 @@ export default class Api {
         about: aboutValue,
       }),
     })
-      .then((res) => {
-        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-      })
+      .then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err);
       });
@@ -65,9 +64,7 @@ export default class Api {
         avatar: avatarValue,
       }),
     })
-      .then((res) => {
-        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-      })
+      .then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err);
       });
@@ -85,9 +82,7 @@ export default class Api {
         link: data.link,
       }),
     })
-      .then((res) => {
-        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-      })
+      .then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err);
       });
@@ -100,12 +95,10 @@ export default class Api {
         authorization: this._token,
       },
     })
-    .then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-    })
-    /* .catch((err) => {
-      console.log(err);
-    }) */;
+      .then((res) => this._checkResponse(res))
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   putLike(cardId) {
@@ -119,9 +112,7 @@ export default class Api {
         },
       }
     )
-      .then((res) => {
-        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-      })
+      .then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err);
       });
@@ -138,9 +129,7 @@ export default class Api {
         },
       }
     )
-      .then((res) => {
-        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-      })
+      .then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err);
       });
