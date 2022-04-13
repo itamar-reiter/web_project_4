@@ -5,7 +5,8 @@ export default class Card {
     elementSelector,
     handleCardClick,
     popupConfirmation,
-    serverRequest
+    serverRequest,
+    personalId
   ) {
     this._cardData = cardData;
     this._elementSelector = elementSelector;
@@ -14,6 +15,7 @@ export default class Card {
     };
     this._popupConfirmation = popupConfirmation;
     this._serverRequest = serverRequest;
+    this._personalId = personalId;
   }
 
   _getTemplate() {
@@ -34,7 +36,7 @@ export default class Card {
   _displayGarbageIcon = () => {
     if (
       !this._cardData.owner ||
-      this._cardData.owner._id === "2e5154ce112b4a6ba0a11409"
+      this._cardData.owner._id === this._personalId
     ) {
       this._garbageButton.classList.add("element__garbage-button_active");
     }
@@ -50,7 +52,7 @@ export default class Card {
   _handleLikeStatus(card) {
     if (card.likes.length !== 0) {
       card.likes.every((like) => {
-        if (like._id === "2e5154ce112b4a6ba0a11409") {
+        if (like._id === this._personalId) {
           this._likeButton.classList.add("element__like-button_active");
           return false;
         } else {

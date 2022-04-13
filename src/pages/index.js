@@ -90,7 +90,8 @@ const cardSection = new Section((item) => {
     "#cardTemplate",
     createPopupImage,
     popupConfirmation,
-    getApi
+    getApi,
+    constants.apiData.personalId,
   );
   cardSection.setItem(renderedCard.generateCard());
 }, ".grid-elements");
