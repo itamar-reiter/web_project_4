@@ -95,8 +95,9 @@ export default class Card {
   }
 
   _handleGarbageClick = () => {
+    this._popupConfirmation.apllyCurrentCard(this._card, this._cardData);
     this._popupConfirmation.open();
-    this._popupConfirmation.setEventListeners(this._card, this._cardData);
+    this._popupConfirmation.setEventListeners();
   };
 
   _handleCardLikeButton = () => {
