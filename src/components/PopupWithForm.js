@@ -32,6 +32,16 @@ export default class PopupWithForm extends Popup {
     this._executeSubmitEvent(this._getInputValues());
   };
 
+  apllySubmittingText = (isLoading, defaultText) => {
+    if (isLoading) {
+      this.popup.querySelector(".popup__submit-button").textContent =
+        "Saving...";
+    } else {
+      this.popup.querySelector(".popup__submit-button").textContent =
+        defaultText;
+    }
+  };
+
   close() {
     super.close();
     this._form.reset();
