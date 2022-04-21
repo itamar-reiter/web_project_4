@@ -98,6 +98,7 @@ const cardSection = new Section((item) => {
 
 //instance for popupImage
 const popupImage = new PopupWithImage(".popup_type_image");
+popupImage.setEventListeners();
 
 //instance for confirmation popup
 const popupConfirmation = new PopupWithConfirmation(
@@ -126,7 +127,6 @@ function addUserInfo() {
 
 function createPopupImage(title, link) {
   popupImage.open(title, link);
-  popupImage.setEventListeners();
 }
 
 //instance for initialize form validating
