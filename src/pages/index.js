@@ -124,6 +124,8 @@ const popupConfirmation = new PopupWithConfirmation(
   }
 );
 
+popupConfirmation.setEventListeners();
+
 //instance for getUserInfo dlivered to profileForm inputs
 function addUserInfo() {
   const userData = userInfo.getUserInfo();
