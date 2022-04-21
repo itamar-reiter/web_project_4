@@ -106,17 +106,9 @@ const popupConfirmation = new PopupWithConfirmation(
     getApi
       .deleteCard(cardData._id)
       .then(() => {
-        getApi.getInitialCards().then((cards) => {
-          cards.forEach((card) => {
-            if (card._id !== cardData._id) {
-              if (card === cards[cards.length - 1]) {
-                currentCard.remove();
-                currentCard = null;
-                popupConfirmation.close();
-              }
-            }
-          });
-        });
+        currentCard.remove();
+        currentCard = null;
+        popupConfirmation.close();
       })
       .catch((err) => {
         console.log(err);
