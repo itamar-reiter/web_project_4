@@ -91,7 +91,7 @@ const cardSection = new Section((item) => {
     createPopupImage,
     popupConfirmation,
     getApi,
-    userInfo.getUserId(),
+    userInfo.getUserId()
   );
   cardSection.setItem(renderedCard.generateCard());
 }, ".grid-elements");
@@ -156,21 +156,11 @@ function setEventListeners() {
 }
 
 //set user info and image from the server
-getApi
-  .getUserInfo()
-  .then((res) => {
-    userInfo.setUserInfo(res.name, res.about);
-    userInfo.setUserImage(res.avatar);
-    userInfo.setUserId(res._id);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-//set initialCards from the server
-getApi
-  .getInitialCards()
-  .then((cards) => {
+Promise.all([getApi.getUserInfo(), getApi.getInitialCards()])
+  .then(([info, cards]) => {
+    userInfo.setUserInfo(info.name, info.about);
+    userInfo.setUserImage(info.avatar);
+    userInfo.setUserId(info._id);
     console.log(cards);
     cardSection.renderItems(cards);
   })
