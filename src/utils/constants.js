@@ -3,7 +3,6 @@ export const apiData = {
   groupId: "group-12",
   token: "4c5ffc10-7ef8-4216-9730-733ca7b03273",
   serverAdress: "https://around.nomoreparties.co",
-  userId: "2e5154ce112b4a6ba0a11409",
 };
 export const profile = document.querySelector(".profile");
 export const userImage = document.querySelector(".user-image");

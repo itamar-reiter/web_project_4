@@ -30,4 +30,13 @@ export default class UserInfo {
     this._nameContainer.textContent = name;
     this._jobContainer.textContent = job;
   }
+
+setUserId(resJson) {
+  this.userId = resJson;
+}
+
+  getUserId() {
+    return this.userId;
+  }
+
 }

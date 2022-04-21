@@ -91,7 +91,7 @@ const cardSection = new Section((item) => {
     createPopupImage,
     popupConfirmation,
     getApi,
-    constants.apiData.userId
+    userInfo.getUserId(),
   );
   cardSection.setItem(renderedCard.generateCard());
 }, ".grid-elements");
@@ -161,6 +161,7 @@ getApi
   .then((res) => {
     userInfo.setUserInfo(res.name, res.about);
     userInfo.setUserImage(res.avatar);
+    userInfo.setUserId(res._id);
   })
   .catch((err) => {
     console.log(err);
