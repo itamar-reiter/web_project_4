@@ -12,11 +12,11 @@ export default class UserInfo {
   }
 
   setUserImage = (resJson) => {
-      this._userImageContainer.style.backgroundImage =
-        `
+    this._userImageContainer.style.backgroundImage =
+      `
       url(` +
-        resJson +
-        `)`;
+      resJson +
+      `)`;
   };
 
   getUserInfo = () => {
@@ -31,12 +31,11 @@ export default class UserInfo {
     this._jobContainer.textContent = job;
   }
 
-setUserId(resJson) {
-  this.userId = resJson;
-}
+  setUserId(resJson) {
+    this.userId = resJson;
+  }
 
   getUserId() {
     return this.userId;
   }
-
 }
